@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanalei&family=Macondo&display=swap');
+
+.home_container {
+  width: 100%;
+  height: 100vh;
+  font-weight: bolder;
+  background-color: rgba(245, 222, 179, 0.3);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: 'Macondo', cursive;
+}
+
+.home_container,
+.home_section,
+.home_article,
+.home_btn_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home_section,
+.home_article {
+  flex-direction: column;
+}
+
+.home_section {
+  max-width: 700px;
+}
+
+.home_article_text {
+  color: #6c63ff;
+  font-size: 2rem;
+}
+
+.home_article_title {
+  font-family: 'Hanalei', cursive;
+  color: #f50057;
+  font-size: 3rem;
+}
+
+.home_article {
+  justify-content: center;
+}
+
+.home_img {
+  width: 100%;
+  max-height: 40vh;
+  align-self: center;
+  margin-block: 3rem;
+}
+
+.home_btn_div {
+  justify-content: center;
+  gap: 2.5rem;
+  // margin-block: 5rem;
+  // margin-block-start: 3rem;
+}
+
+.home_btn {
+  text-decoration: none;
+  background: transparent;
+  padding-block: 0.8rem;
+  padding-inline: 2rem;
+  border-radius: 10px;
+  animation: all 700ms ease-in;
+}
+
+.btn_su,
+.btn_li:hover {
+  background: #6c63ff;
+  color: #faebd7;
+}
+
+.btn_li,
+.btn_su:hover {
+  background: #f50057;
+  color: #faebd7;
+}
+
+// MEDIA QUERY FOR 400px SCREENS AND BELOW
+@media only screen and (min-width: 400px) {
+  .home_article_title {
+    font-size: 4rem;
+  }
+}

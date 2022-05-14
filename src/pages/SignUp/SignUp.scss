@@ -1,0 +1,15 @@
+.bg--signup {
+  background-image: url(../../assets/images/form_wood.jpg);
+}
+
+.form--pins {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 0.5rem;
+
+  .pin {
+    width: 25px;
+    height: 25px;
+  }
+}

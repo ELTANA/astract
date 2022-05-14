@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /Tasks/{document=**} {
+      // allow read, write;
+      // allow read, create, delete, update;
+
+      // RULE 1: ONLY AUTHENTICATED USERS CAN CREATE DOCUMENTS(TASK)
+      allow create: if request.auth != null;
+
+      // RULE 2: ONLY A LOGGED IN USER uid THAT MATCH THE DOC(TASK) CAN READ UPDATE & DELETE(CRUD)
+      allow read, write: if request.auth.uid == resource.data.uid;
+
+      // RULE 3: ALLOW ADMIN TO READ, UPDATE & DELETE(CRUD) DOC(TASKS)
+      allow read, write: if request.auth.uid == 'OcdWKravCHPvNnodffWJ87qE77u2';
+    }
+  }
+}
+

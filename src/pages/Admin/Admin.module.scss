@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+
+$font-family: 'Macondo', cursive;
+$base-bg: #faebd7;
+$base-bg-alt: #191d25;
+$base-font: #222;
+$green: #008000;
+$green-alt: rgba(0, 128, 0, 0.8);
+$green-light: #c6f7c6;
+$white-smoke: #f5f5f5;
+$mild-red: #dc3545;
+$dark-red: #ff0019;
+$mild-blue-alt: #0d6efd;
+$mild-blue: #0066ff;
+$violet: #6c63ff;
+
+.admin_container {
+  background: $base-bg;
+  min-height: 100vh;
+  width: 100%;
+  padding-block: 5%;
+  padding-inline: 3.5%;
+
+  .adminboard {
+    width: 100%;
+    color: $base-font;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    article {
+      border: 2px solid red;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .task_list {
+        width: 100%;
+        background: $white-smoke;
+
+        ul {
+          width: inherit;
+          padding-block-start: 5%;
+          padding-block-end: 5%;
+          padding-inline: 5%;
+
+          li {
+            list-style: none;
+            margin-block-end: 5%;
+            border-radius: 10px;
+            padding-inline: 5%;
+            padding-block: 3%;
+            box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset,
+              rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2%;
+
+            .details {
+              width: 50%;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: center;
+              gap: 10px;
+
+              .name {
+                border-left: 5px solid $green;
+                margin-block-end: 0;
+                background-color: $base-bg;
+                color: $base-font;
+                padding-block: 0.2rem;
+                padding-inline-start: 0.5rem;
+                border-radius: 0 15px 15px 0;
+
+                span {
+                  border-radius: inherit;
+                  font-weight: 600;
+
+                  &:first-of-type {
+                    width: 200px;
+                    padding-inline-end: 1rem;
+                    font-size: 0.8rem;
+                  }
+
+                  &:last-of-type {
+                    background: $green;
+                    color: $white-smoke;
+                    padding-block: 0.25rem;
+                    padding-inline-start: 1rem;
+                    padding-inline-end: 2rem;
+                  }
+                }
+              }
+
+              .deadline {
+                border-left: 5px solid $mild-red;
+                margin-block-end: 0;
+                width: max-content;
+                background-color: $base-bg;
+                color: $base-font;
+                font-size: 0.8rem;
+                padding-block: 0.2rem;
+                padding-inline-start: 0.5rem;
+                border-radius: 0 15px 15px 0;
+
+                span {
+                  border-radius: inherit;
+                  font-weight: 600;
+
+                  &:first-of-type {
+                    padding-inline-end: 1rem;
+                  }
+
+                  &:last-of-type {
+                    background: $mild-red;
+                    color: $white-smoke;
+                    padding-block: 0.25rem;
+                    padding-inline-start: 1rem;
+                    padding-inline-end: 2rem;
+                  }
+                }
+              }
+            }
+
+            .title_div {
+              width: 50%;
+              text-align: end;
+
+              .category {
+                background-color: $violet;
+                color: $white-smoke;
+                padding-block: 0.2rem;
+                padding-inline: 2rem;
+                border-radius: 15px;
+              }
+            }
+
+            .details {
+              width: 50%;
+              font-size: 1rem;
+              // display: flex;
+              // flex-direction: column;
+              // align-items: center;
+              // justify-content: space-between;
+              // gap: 2%;
+            }
+          }
+        }
+      }
+    }
+
+    // aside {
+    //   width: 25%;
+    //   border: 2px solid green;
+    // }
+  }
+}
+
+// MEDIA QUERY FOR 425 SCREENS AND SMALLER
+// @media only screen and (max-width: 425) {
+//   .adminboard {
+//     article {
+//     }
+//   }
+// }
