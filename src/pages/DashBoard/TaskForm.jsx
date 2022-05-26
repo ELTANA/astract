@@ -54,7 +54,8 @@ const TaskForm = ({ uid, displayName }) => {
       displayName: displayName,
       taskName,
       taskCategory,
-      taskDeadline
+      taskDeadline,
+      comments: []
     })
   }
 
@@ -66,7 +67,7 @@ const TaskForm = ({ uid, displayName }) => {
       setTaskDeadlineValue('')
       // setTaskDeadline('')
     }
-    // console.log('Effect:', response.success)
+    // console.table('Effect:', response.success)
   }, [response.success])
 
   return (

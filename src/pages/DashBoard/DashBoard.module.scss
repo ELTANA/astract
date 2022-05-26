@@ -13,6 +13,7 @@ $dark-red: #ff0019;
 $mild-blue-alt: #0d6efd;
 $mild-blue: #0066ff;
 $violet: #6c63ff;
+$gray: #909090;
 
 .dashboard_container {
   background: $base-bg;
@@ -24,12 +25,12 @@ $violet: #6c63ff;
   .dashboard {
     width: 100%;
     color: $base-font;
-    display: grid;
-    grid-template-columns: 5fr 3fr;
-    gap: 3rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 5%;
 
     article {
-      background: $white-smoke;
+      width: 60%;
       padding-block: 3%;
 
       h1 {
@@ -40,101 +41,263 @@ $violet: #6c63ff;
         padding-block-start: 3%;
 
         ul {
-          background: $white-smoke;
-          padding-inline: 5%;
+          // padding-inline: 5%;
           padding-block-end: 5%;
+          padding-inline-start: 0;
           width: 100%;
 
-          li {
+          .task {
             list-style: none;
-            margin-block-end: 5%;
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+              rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+            background: $white-smoke;
             border-radius: 10px;
-            padding-inline: 1rem;
-            padding-block: 1.5rem;
-            box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset,
-              rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px;
+            margin-block-end: 10%;
+            padding: 2rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            // gap: 5%;
+            // justify-content: space-between;
 
-            .name {
-              font-size: 1.5rem;
-            }
+            .task_details {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding-block-end: 1rem;
+              border-block-end: 1px solid $gray;
 
-            .category {
-              background: $violet;
-              color: $white-smoke;
-              padding-block: 0.3rem;
-              padding-inline: 1rem;
-              border-radius: 20px;
-              font-size: 0.7rem;
-            }
+              .name_div {
 
-            .deadline {
-              margin-left: auto;
-              color: $mild-red;
-              text-align: end;
-              // font-weight: 500;
+                .name {
+                  font-size: 1.5rem;
+                  margin-block-end: 0.5rem;
+                }
 
-              span {
-                background: $mild-red;
-                color: $white-smoke;
-                padding-block: 0.3rem;
-                padding-inline: 1rem;
-                border-radius: 20px;
-                font-size: 0.7rem;
+                .category {
+                  background: $violet;
+                  color: $white-smoke;
+                  font-size: 0.7rem;
+                  padding-block: 0.3rem;
+                  padding-inline: 1rem;
+                  border-radius: 20px;
+                }
               }
+
+              .deadline {
+                color: $mild-red;
+                text-align: end;
+                font-weight: 500;
+                // margin-left: auto;
+
+                p {
+                  margin-block-end: 0.5rem;
+                }
+
+                span {
+                  background: $mild-red;
+                  color: $white-smoke;
+                  padding-block: 0.3rem;
+                  padding-inline: 1rem;
+                  border-radius: 20px;
+                  font-size: 0.7rem;
+                }
+              }
+
             }
 
-            .action_btns {
+            .interactive_div {
+              width: 100%;
               display: flex;
               flex-direction: column;
-              gap: 1rem;
-              padding-inline-start: 1rem;
+              // gap: 2rem;
+              // justify-content: space-between;
 
-              .action_btn {
-                cursor: pointer;
-                border-radius: 50%;
-                width: 2rem;
-                height: 2rem;
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-                  rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-                  rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+              .interactive {
+                width: 100%;
+                margin-block-start: 0.5rem;
+                margin-block-end: 2rem;
+                color: $base-font;
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.7rem;
-              }
+                // flex-direction: column;
+                gap: 2rem;
 
-              .action_btn:first-child {
-                color: $violet;
-                animation: all 700ms ease-in;
+                .action_btns_wrapper {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: flex-start;
+                  gap: 1rem;
 
-                &:hover {
-                  font-size: 1rem;
-                  background: $violet;
-                  color: $base-bg;
-                  box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 5px 4px;
+
+                  .action_btns_edit {
+                    color: $violet;
+                    transition: all 700ms ease-in;
+
+                    &:hover {
+                      background: $violet;
+                      color: $base-bg;
+                      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+                        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                    }
+                  }
+
+                  .action_btns_delete {
+                    color: $mild-red;
+                    transition: all 700ms ease-in;
+
+                    &:hover {
+                      background: $mild-red;
+                      color: $base-bg;
+                      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+                        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                    }
+                  }
+
+                  .action_btns_edit,
+                  .action_btns_delete {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.3rem;
+                    font-size: 1rem;
+
+                    &:hover {
+                      font-size: 1rem;
+                      padding-block: 0.3rem;
+                      padding-inline: 0.5rem;
+                      border-radius: 1rem;
+                    }
+
+                    .title {
+                      font-size: 0.7rem;
+                    }
+
+                    .action_btn {
+                      border-radius: 50%;
+                      width: 2rem;
+                      height: 2rem;
+                      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+                        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1rem;
+                    }
+
+                  }
+                }
+
+                .add_comment {
+                  width: 100%;
+                  max-width: 500px;
+                  background: #fff;
+                  // border: 1px solid $gray;
+                  border-radius: 10px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between;
+                  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+                    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+                  textarea {
+                    border: none;
+                    border-radius: 10px 10px 0 0;
+                    padding: 0.7rem;
+                    font-size: 0.8rem;
+                    line-height: 1rem;
+
+                    &:focus:invalid {
+                      outline: 1px solid $mild-red;
+                    }
+
+                    &:focus:valid {
+                      outline: 1px solid $green;
+                    }
+                  }
+
+                  .comments_btn {
+                    border: none;
+                    outline: none;
+                    background: $mild-blue;
+                    color: $white-smoke;
+                    padding-block: 0.3rem;
+                    border-radius: 0 0 10px 10px;
+                    font-size: 0.75rem;
+
+                    &:hover {
+                      background: $mild-blue-alt;
+
+                    }
+                  }
                 }
               }
 
-              .action_btn:last-child {
-                color: $mild-red;
-                animation: all 700ms ease-in;
+              .task_comments {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
 
-                &:hover {
-                  font-size: 1rem;
-                  background: $mild-red;
-                  color: $base-bg;
-                  box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 5px 4px;
+                .comment {
+                  background: white;
+                  color: $base-bg-alt;
+                  border-radius: 10px;
+                  padding-block: 0.5rem;
+                  padding-inline: 1rem;
+                  margin-block-end: 1rem;
+                  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+                    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+                  p {
+                    margin-block-end: 0;
+                  }
                 }
+
+                .comment_toggle__btn {
+                  display: flex;
+                  align-items: center;
+                  justify-content: flex-start;
+                  gap: 1rem;
+
+                  span {
+                    font-size: 1.1rem;
+                  }
+
+                  .toggle_btn {
+                    cursor: pointer;
+                    width: 2rem;
+                    height: 2rem;
+                    color: $violet;
+                    border-radius: 50%;
+                    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+                      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1rem;
+
+                    &:hover {
+                      background: $violet;
+                      color: $base-bg;
+                      box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 5px 4px;
+                    }
+                  }
+
+                }
+
               }
             }
           }
         }
       }
     }
+
     aside {
+      width: 40%;
+
       .aside_card {
         background-color: $base-bg-alt;
         color: $white-smoke;
@@ -164,7 +327,7 @@ $violet: #6c63ff;
             background: $mild-blue-alt;
             color: $base-bg;
             border: none;
-            animation: all 700ms ease-in;
+            transition: all 700ms ease-in;
 
             &:hover {
               background-color: $mild-blue;
@@ -180,81 +343,101 @@ $violet: #6c63ff;
 // MEDIA QUERY FOR 1000px SCREENS AND SMALLER
 @media only screen and (max-width: 1000px) {
   .dashboard_container {
+    background: $base-bg;
     min-height: 100vh;
     width: 100%;
+    padding-block: 5%;
+    padding-inline: 2%;
 
     .dashboard {
       width: 100%;
-      display: grid;
-      grid-template-columns: 1fr;
-      place-items: center;
-      grid-template-areas:
-        'aside'
-        'article';
-    }
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
 
-    article,
-    aside {
-      width: 100%;
-    }
+      article {
+        order: 2;
+        width: 100%;
+      }
 
-    article {
-      grid-area: article;
-    }
-    aside {
-      grid-area: aside;
+      aside {
+        order: 1;
+        width: 100%;
+        margin-block: 5%;
+      }
     }
   }
+}
 
-  // MEDIA QUERY FOR 767px SCREENS AND SMALLER
-  @media only screen and (max-width: 767px) {
-    .name_div {
-      max-width: 18ch;
-    }
-  }
+// MEDIA QUERY FOR 767px SCREENS AND SMALLER
+@media only screen and (max-width: 767px) {
+  .dashboard {
+    .interactive {
+      // flex-direction: column;
+      flex-wrap: wrap;
 
-  // MEDIA QUERY FOR 500px SCREENS AND SMALLER
-  @media only screen and (max-width: 500px) {
-    article {
-      grid-area: article;
+      .action_btns_wrapper {
+        justify-content: flex-end !important;
 
-      li {
-        flex-direction: column;
-        gap: 1rem;
 
-        .name_div {
-          min-width: 100%;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        }
+        .action_btns_edit,
+        .action_btns_delete {
 
-        .deadline {
-          margin: auto;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
+          &.title {
+            order: 1;
+          }
 
-          p {
-            margin-block-end: 0.3rem;
+          & span {
+            order: 2;
           }
         }
 
-        .action_btns {
-          padding-inline: 0 !important;
-          flex-direction: row !important;
-          gap: 2rem !important;
-        }
       }
     }
-    aside {
-      grid-area: aside;
+  }
+}
 
-      .dashboard_form {
-        padding-inline: 0 !important;
+// MEDIA QUERY FOR 500px SCREENS AND SMALLER
+@media only screen and (max-width: 500px) {
+  .dashboard {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    article {
+      order: 2;
+      width: 100%;
+
+      .task_details {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        h2,
+        p {
+          margin-block-end: 0 !important;
+        }
+
+        .name_div,
+        .deadline {
+          width: 100%;
+          display: flex;
+          align-items: center;
+        }
+
+        .name_div {
+          flex-wrap: wrap;
+          justify-content: space-between;
+
+
+        }
+
+        .deadline {
+          flex-wrap: wrap;
+          justify-content: flex-end;
+          gap: 1rem;
+        }
       }
     }
   }

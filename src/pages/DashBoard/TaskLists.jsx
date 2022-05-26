@@ -3,12 +3,13 @@ import { PropTypes } from 'prop-types'
 import { useFireStore } from '../../hooks/useFireStore'
 import { Modal } from 'react-bootstrap'
 
-// FONT AWESOME
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+// REACT ICONS
+import { BsPencilSquare, BsTrash } from 'react-icons/bs'
 
 // STYLES
 import styles from './DashBoard.module.scss'
+import AddComment from './AddComment'
+import TaskComments from './TaskComment'
 
 const TaskLists = ({ tasks }) => {
   const { deleteTaskDoc } = useFireStore('Tasks')
@@ -35,85 +36,104 @@ const TaskLists = ({ tasks }) => {
     <ul>
       {tasks.map((task) => (
         // console.log('Tasks:', task)
-        <li key={task.id}>
-          <div className={styles.name_div}>
-            <h2 className={styles.name}> {task.taskName}</h2>
+        <li key={task.id} className={styles.task}>
+          <div className={styles.task_details}>
+            <div className={styles.name_div}>
+              <h2 className={styles.name}> {task.taskName}</h2>
 
-            <span className={styles.category}>{task.taskCategory}</span>
-          </div>
-
-          {task.taskDeadline && (
-            <div className={styles.deadline}>
-              <p>Deadline</p>
-              <span>{task.taskDeadline}</span>
+              <span className={styles.category}>{task.taskCategory}</span>
             </div>
-          )}
-          <div className={styles.action_btns}>
-            <span className={styles.action_btn}>
-              <FontAwesomeIcon icon={faPenToSquare} onClick={showModal} />
-            </span>
-            <span
-              className={styles.action_btn}
-              onClick={() => {
-                deleteTaskDoc(task.id)
-              }}>
-              <FontAwesomeIcon icon={faTrashCan} />
-            </span>
+
+            {task.taskDeadline && (
+              <div className={styles.deadline}>
+                <p>Deadline</p>
+                <span>{task.taskDeadline}</span>
+              </div>
+            )}
+
+            <Modal show={show} onHide={handleClose} className={styles.update_modal}>
+              <Modal.Header closeButton></Modal.Header>
+              <Modal.Body>
+                <form
+                  onSubmit={updateOldTask}
+                  className='d-flex flex-column align-items-center justify-content-about p-3'>
+                  <h2 className='text-center'>Update Task</h2>
+                  <label className='form-group mb-3 w-100 fs-5'>
+                    <span>Task Name</span>
+                    <input
+                      className='form-control px-3 py-2 fs-5'
+                      type='text'
+                      name='taskName'
+                      placeholder='Update Task Name'
+                      onChange={(e) => {
+                        setTaskName(e.target.value)
+                      }}
+                      value={taskName}
+                    />
+                  </label>
+                  <label className='form-group mb-3 w-100 fs-5'>
+                    <span>Task Category</span>
+                    <input
+                      className='form-control px-3 py-2 fs-5'
+                      type='text'
+                      name='taskCategory'
+                      placeholder='Update Task Name'
+                      onChange={(e) => {
+                        setTaskCategory(e.target.value)
+                      }}
+                      value={taskCategory}
+                    />
+                  </label>
+                  <label className='form-group mb-3 w-100 fs-5'>
+                    <span>Task Deadline</span>
+                    <input
+                      className='form-control px-3 py-2 fs-5'
+                      type='datetime-local'
+                      name='taskDeadline'
+                      placeholder='Update Task Deadline'
+                      onChange={(e) => {
+                        setTaskDeadline(e.target.value)
+                      }}
+                      value={taskDeadline}
+                    />
+                  </label>
+
+                  <button className='btn btn-primary form-control mt-4 mb-3 py-2 fs-5'>
+                    Update Task
+                  </button>
+                </form>
+              </Modal.Body>
+            </Modal>
           </div>
 
-          <Modal show={show} onHide={handleClose} className={styles.update_modal}>
-            <Modal.Header closeButton></Modal.Header>
-            <Modal.Body>
-              <form
-                onSubmit={updateOldTask}
-                className='d-flex flex-column align-items-center justify-content-about p-3'>
-                <h2 className='text-center'>Update Task</h2>
-                <label className='form-group mb-3 w-100 fs-5'>
-                  <span>Task Name</span>
-                  <input
-                    className='form-control px-3 py-2 fs-5'
-                    type='text'
-                    name='taskName'
-                    placeholder='Update Task Name'
-                    onChange={(e) => {
-                      setTaskName(e.target.value)
-                    }}
-                    value={taskName}
-                  />
-                </label>
-                <label className='form-group mb-3 w-100 fs-5'>
-                  <span>Task Category</span>
-                  <input
-                    className='form-control px-3 py-2 fs-5'
-                    type='text'
-                    name='taskCategory'
-                    placeholder='Update Task Name'
-                    onChange={(e) => {
-                      setTaskCategory(e.target.value)
-                    }}
-                    value={taskCategory}
-                  />
-                </label>
-                <label className='form-group mb-3 w-100 fs-5'>
-                  <span>Task Deadline</span>
-                  <input
-                    className='form-control px-3 py-2 fs-5'
-                    type='datetime-local'
-                    name='taskDeadline'
-                    placeholder='Update Task Deadline'
-                    onChange={(e) => {
-                      setTaskDeadline(e.target.value)
-                    }}
-                    value={taskDeadline}
-                  />
-                </label>
+          <div className={styles.interactive_div}>
+            <div className={styles.interactive}>
+              <div className={styles.action_btns_wrapper}>
+                <div className={styles.action_btns_edit}>
+                  <span className={styles.action_btn}>
+                    <BsPencilSquare onClick={showModal} />
+                  </span>
+                  <div className={styles.title}>Edit Task</div>
+                </div>
 
-                <button className='btn btn-primary form-control mt-4 mb-3 py-2 fs-5'>
-                  Update Task
-                </button>
-              </form>
-            </Modal.Body>
-          </Modal>
+                <div className={styles.action_btns_delete}>
+                  <span
+                    className={styles.action_btn}
+                    onClick={() => {
+                      deleteTaskDoc(task.id)
+                    }}>
+                    <BsTrash />
+                  </span>
+
+                  <div className={styles.title}>Delete Task</div>
+                </div>
+              </div>
+
+              <AddComment />
+            </div>
+
+            <TaskComments />
+          </div>
         </li>
       ))}
     </ul>

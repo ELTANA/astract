@@ -125,13 +125,8 @@ export const useFireStore = (collection) => {
         type: 'ERROR',
         payload: err.message
       })
+      return null
     }
-    //
-    // astractFirestore.collection('tasks').doc(id).update({
-    //   taskName: true
-    // })
-    // const db = firebase.firestore()
-    // db.collection('users').doc(doc.id).update({ foo: 'bar' })
   }
 
   useEffect(() => {
