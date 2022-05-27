@@ -6,6 +6,7 @@ import { useFireStore } from '../../hooks/useFireStore'
 import InputField from '../../components/InputField'
 import Button from '../../components/Button'
 import { Card, Form } from 'react-bootstrap'
+import uuid from 'react-uuid'
 
 // STYLES
 import styles from './DashBoard.module.scss'
@@ -51,6 +52,7 @@ const TaskForm = ({ uid, displayName }) => {
 
     addTaskDoc({
       uid: uid,
+      id: uuid(),
       displayName: displayName,
       taskName,
       taskCategory,

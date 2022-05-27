@@ -1,27 +1,45 @@
 import React, { useState } from 'react'
-import { timeStamp } from '../../firebase/config'
+import PropTypes from 'prop-types'
+
+// HOOKS
+import { astractFirestore, timeStamp } from '../../firebase/config'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import uuid from 'react-uuid'
+import { useFireStore } from '../../hooks/useFireStore'
+
+// STYLES
 import styles from './DashBoard.module.scss'
 
-const AddComment = () => {
+const AddComment = ({ taskId, taskComments }) => {
   const { user } = useAuthContext()
+  const { addComment, response } = useFireStore('Tasks')
   const [newComment, setNewComment] = useState('')
 
-  const addComment = async (e) => {
+  const handleAddComment = async (e) => {
     e.preventDefault()
 
     const commentToAdd = {
       displayName: user.displayName,
       content: newComment,
-      createdAt: timeStamp.fromDate(new Date()),
-      id: uuid()
+      id: uuid(),
+      createdAt: timeStamp.fromDate(new Date())
     }
-    console.log(commentToAdd)
+
+    // console.log(taskId)
+    // console.log(taskComments)
+
+    // console.table(commentToAdd)
+
+    await addComment(taskId, {
+      comments: [...taskComments, commentToAdd]
+    })
+    if (!response.error) {
+      setNewComment('')
+    }
   }
 
   return (
-    <form className={styles.add_comment} onSubmit={addComment}>
+    <form className={styles.add_comment} onSubmit={handleAddComment}>
       <textarea
         placeholder='Enter New Comment'
         onChange={(e) => setNewComment(e.target.value)}
@@ -34,3 +52,8 @@ const AddComment = () => {
 }
 
 export default AddComment
+
+AddComment.propTypes = {
+  taskId: PropTypes.string,
+  taskComments: PropTypes.array
+}

@@ -122,14 +122,14 @@ const TaskLists = ({ tasks }) => {
                     onClick={() => {
                       deleteTaskDoc(task.id)
                     }}>
-                    <BsTrash />
+                    <BsTrash task={task} />
                   </span>
 
                   <div className={styles.title}>Delete Task</div>
                 </div>
               </div>
 
-              <AddComment />
+              <AddComment taskId={task.id} taskComments={task.comments} />
             </div>
 
             <TaskComments />

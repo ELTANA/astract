@@ -26,6 +26,13 @@ const firestoreReducer = (state, action) => {
         success: true,
         error: null
       }
+    case 'ADDED_COMMENT':
+      return {
+        isPending: false,
+        document: action.payload,
+        success: true,
+        error: null
+      }
     case 'UPDATED_TASK':
       return {
         // ...state,
@@ -111,10 +118,10 @@ export const useFireStore = (collection) => {
 
     try {
       // ADD TIME STAMP
-      const updatedAt = timeStamp.fromDate(new Date())
+      const addedAt = timeStamp.fromDate(new Date())
 
       // UPDATE TASK
-      const updatedTask = await ref.doc(id).update({ ...doc, updatedAt })
+      const updatedTask = await ref.doc(id).update({ ...doc, addedAt })
       dispatchIfNotCancelled({
         type: 'UPDATED_TASK',
         payload: updatedTask
@@ -129,9 +136,23 @@ export const useFireStore = (collection) => {
     }
   }
 
+  // ADD COMMENT
+  const addComment = async (id, updates) => {
+    dispatch({ type: 'IS_PENDING' })
+
+    try {
+      const addedComment = await ref.doc(id).update(updates)
+      dispatchIfNotCancelled({ type: 'ADDED_COMMENT', payload: addedComment })
+      return addedComment
+    } catch (error) {
+      dispatchIfNotCancelled({ type: 'ERROR', payload: error.message })
+      return null
+    }
+  }
+
   useEffect(() => {
     return () => setIsCancelled(true)
   }, [])
 
-  return { addTaskDoc, deleteTaskDoc, updateTaskDoc, response }
+  return { addTaskDoc, deleteTaskDoc, updateTaskDoc, addComment, response }
 }
