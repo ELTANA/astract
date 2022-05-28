@@ -1,5 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 $font-family: 'Macondo', cursive;
 $base-bg: #faebd7;
@@ -104,24 +104,24 @@ code {
     animation: all 700ms ease-in;
 
     &:hover {
-      color: $white-smoke !important;
+      color: $white-smoke  !important;
     }
 
     &.active {
-      color: $mild-red !important;
+      color: $mild-red  !important;
       font-weight: 600;
       animation: all 700ms ease-in;
     }
 
     &.active:hover {
-      color: $dark-red !important;
+      color: $dark-red  !important;
     }
   }
 
   .nav_btn {
     width: 150px;
     background: $mild-red;
-    color: $white-smoke !important;
+    color: $white-smoke  !important;
     margin-inline-start: 1.5rem;
     animation: all 700ms ease-in;
 

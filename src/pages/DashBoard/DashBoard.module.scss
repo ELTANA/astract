@@ -5,8 +5,10 @@ $base-bg: #faebd7;
 $base-bg-alt: #191d25;
 $base-font: #222;
 $green: #008000;
-$green-alt: rgba(0, 128, 0, 0.8);
+$green-alt: #008000cc;
+$green-dark: #00c800;
 $green-light: #c6f7c6;
+$green-light-alt: #f0fff0;
 $white-smoke: #f5f5f5;
 $mild-red: #dc3545;
 $dark-red: #ff0019;
@@ -14,6 +16,18 @@ $mild-blue-alt: #0d6efd;
 $mild-blue: #0066ff;
 $violet: #6c63ff;
 $gray: #909090;
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
 
 .dashboard_container {
   background: $base-bg;
@@ -117,8 +131,8 @@ $gray: #909090;
 
               .interactive {
                 width: 100%;
-                margin-block-start: 0.5rem;
-                margin-block-end: 2rem;
+                margin-block-start: 2rem;
+                margin-block-end: 3rem;
                 color: $base-font;
                 display: flex;
                 // flex-direction: column;
@@ -194,7 +208,7 @@ $gray: #909090;
                   width: 100%;
                   max-width: 500px;
                   background: #fff;
-                  // border: 1px solid $gray;
+                  margin-block: 0.5rem;
                   border-radius: 10px;
                   display: flex;
                   flex-direction: column;
@@ -242,18 +256,146 @@ $gray: #909090;
                 gap: 1rem;
 
                 .comment {
+                  width: inherit;
                   background: white;
                   color: $base-bg-alt;
                   border-radius: 10px;
-                  padding-block: 0.5rem;
-                  padding-inline: 1rem;
+                  // padding-block: 1rem;
+                  // padding-inline: 1rem;
                   margin-block-end: 1rem;
-                  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
-                    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                  display: flex;
+                  // align-items: center;
+                  justify-content: space-between;
 
-                  p {
-                    margin-block-end: 0;
+                  .vote {
+                    width: 10%;
+                    background: $green-light-alt;
+                    color: $base-bg-alt;
+                    padding-block: 1rem;
+                    padding-inline: 0.5rem;
+                    border-radius: 0 10px 10px 0;
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .vote_count {
+                      user-select: none;
+                      font-size: 1.5rem;
+                      font-weight: 600;
+                      color: $base-bg-alt;
+
+                      &.positive {
+                        color: $green-dark;
+                      }
+
+                      &.negative {
+                        color: $mild-red;
+                      }
+                    }
+
+                    .vote_btn {
+                      cursor: pointer;
+                      color: $base-bg-alt;
+                      transition: all 500ms ease-in;
+
+                      &:hover:first-of-type {
+                        color: $green;
+
+                        &:active {
+                          animation: pulse 500ms ease-in;
+                        }
+                      }
+
+                      &:hover:last-of-type {
+                        color: $mild-red;
+
+                        &:active {
+                          animation: pulse 500ms ease-in;
+                        }
+                      }
+                    }
                   }
+
+                  .comment_container {
+                    width: 90%;
+                    padding-block: 1rem;
+                    padding-inline: 1.5rem;
+
+                    .comment_content {
+                      color: $base-bg-alt;
+                      font-size: 1rem;
+
+                      p {
+                        span {
+                          font-family: 'Playfair Display', serif;
+                          font-size: 1.5rem;
+                          color: $violet;
+
+                          &:first-child {
+                            margin-inline-end: 0.5rem;
+                          }
+
+                          &:last-child {
+                            margin-inline-start: 0.5rem;
+                          }
+                        }
+                      }
+                    }
+
+                    .comment_details {
+                      padding-block: 0.5rem;
+                      display: flex;
+                      align-items: center;
+
+                      .comment_name {
+                        background: $violet;
+                        color: $white-smoke;
+                        font-size: 0.8rem;
+                        word-spacing: 0.4rem;
+                        padding-inline: 1rem;
+                        padding-block: 0.2rem;
+                        border-radius: 1rem;
+                        margin-inline-end: 0.2rem;
+
+                        .comment_icon {
+                          margin-inline-end: 0.5rem;
+                          color: white;
+                          font-weight: bolder;
+                        }
+                      }
+
+                      .comment_time {
+                        font-size: 0.7rem;
+                        color: rgba($color: $base-bg-alt, $alpha: 0.5);
+                      }
+
+                      .delete_comment {
+                        cursor: pointer;
+                        color: $mild-red;
+                        margin-left: auto;
+                        width: 1.8rem;
+                        height: 1.8rem;
+                        border-radius: 50%;
+                        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+                          rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 0.9rem;
+
+                        &:hover {
+                          background: $mild-red;
+                          color: $white-smoke;
+                          box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 5px 4px;
+                        }
+                      }
+                    }
+
+                  }
+
                 }
 
                 .comment_toggle__btn {

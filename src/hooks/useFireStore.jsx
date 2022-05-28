@@ -33,6 +33,13 @@ const firestoreReducer = (state, action) => {
         success: true,
         error: null
       }
+    case 'ADDED_VOTE':
+      return {
+        isPending: false,
+        document: action.payload,
+        success: true,
+        error: null
+      }
     case 'UPDATED_TASK':
       return {
         // ...state,
@@ -150,9 +157,23 @@ export const useFireStore = (collection) => {
     }
   }
 
+  // ADD UPVOTE
+  const upVote = async (id, updates) => {
+    dispatch({ type: 'IS_PENDING' })
+
+    try {
+      const addedVote = await ref.doc(id).update(updates)
+      dispatchIfNotCancelled({ type: 'ADDED_VOTE', payload: addedVote })
+      return addedVote
+    } catch (error) {
+      dispatchIfNotCancelled({ type: 'ERROR', payload: error.message })
+      return null
+    }
+  }
+
   useEffect(() => {
     return () => setIsCancelled(true)
   }, [])
 
-  return { addTaskDoc, deleteTaskDoc, updateTaskDoc, addComment, response }
+  return { addTaskDoc, deleteTaskDoc, updateTaskDoc, addComment, upVote, response }
 }

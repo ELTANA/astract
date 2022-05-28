@@ -132,7 +132,7 @@ const TaskLists = ({ tasks }) => {
               <AddComment taskId={task.id} taskComments={task.comments} />
             </div>
 
-            <TaskComments />
+            <TaskComments comments={task.comments} />
           </div>
         </li>
       ))}
@@ -157,3 +157,7 @@ TaskLists.propTypes = {
 //   onSubmit: PropTypes.func.isRequired,
 //   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
 // }
+
+// comments={task.comments}
+// commentId={task.comments.id}
+// commentVote={task.comment.voteCount}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 // HOOKS
-import { astractFirestore, timeStamp } from '../../firebase/config'
+import { timeStamp } from '../../firebase/config'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import uuid from 'react-uuid'
 import { useFireStore } from '../../hooks/useFireStore'
@@ -22,6 +22,7 @@ const AddComment = ({ taskId, taskComments }) => {
       displayName: user.displayName,
       content: newComment,
       id: uuid(),
+      voteCount: 0,
       createdAt: timeStamp.fromDate(new Date())
     }
 
