@@ -28,7 +28,6 @@ const AddComment = ({ taskId, taskComments }) => {
 
     // console.log(taskId)
     // console.log(taskComments)
-
     // console.table(commentToAdd)
 
     await addComment(taskId, {

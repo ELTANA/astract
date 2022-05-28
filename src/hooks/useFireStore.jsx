@@ -56,6 +56,14 @@ const firestoreReducer = (state, action) => {
         success: true,
         error: null
       }
+    case 'DELETED_COMMENT':
+      return {
+        // ...state,
+        isPending: false,
+        document: null,
+        success: true,
+        error: null
+      }
     case 'ERROR':
       return {
         document: null,
@@ -69,7 +77,7 @@ const firestoreReducer = (state, action) => {
   }
 }
 
-export const useFireStore = (collection) => {
+export const useFireStore = (collection, comments) => {
   const [response, dispatch] = useReducer(firestoreReducer, initialTaskState)
   const [isCancelled, setIsCancelled] = useState(false)
 
@@ -157,6 +165,32 @@ export const useFireStore = (collection) => {
     }
   }
 
+  // DELETE COMMENT
+  // const deleteComment = async (id) => {
+  //   dispatch({ type: 'IS_PENDING' })
+
+  //   try {
+  //     await astractFirestore.collection(collection).doc(id).delete()
+  //     dispatchIfNotCancelled({ type: 'DELETED_COMMENT' })
+  //   } catch (err) {
+  //     dispatchIfNotCancelled({ type: 'ERROR', payload: 'Could not delete Comment!' })
+  //   }
+  // }
+
+  // DELETE COMMENT
+  const deleteComment = async (id, updates) => {
+    dispatch({ type: 'IS_PENDING' })
+
+    try {
+      const deletedComment = await ref.doc(id).update({ updates: updates.arrayRemove(id) })
+      dispatchIfNotCancelled({ type: 'DELETED_COMMENT', payload: deletedComment })
+      return deletedComment
+    } catch (error) {
+      dispatchIfNotCancelled({ type: 'ERROR', payload: error.message })
+      return null
+    }
+  }
+
   // ADD UPVOTE
   const upVote = async (id, updates) => {
     dispatch({ type: 'IS_PENDING' })
@@ -175,5 +209,5 @@ export const useFireStore = (collection) => {
     return () => setIsCancelled(true)
   }, [])
 
-  return { addTaskDoc, deleteTaskDoc, updateTaskDoc, addComment, upVote, response }
+  return { addTaskDoc, deleteTaskDoc, updateTaskDoc, addComment, deleteComment, upVote, response }
 }
