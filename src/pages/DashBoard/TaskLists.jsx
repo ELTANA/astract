@@ -157,7 +157,3 @@ TaskLists.propTypes = {
 //   onSubmit: PropTypes.func.isRequired,
 //   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
 // }
-
-// comments={task.comments}
-// commentId={task.comments.id}
-// commentVote={task.comment.voteCount}

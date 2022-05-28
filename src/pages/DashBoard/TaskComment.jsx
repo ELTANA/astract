@@ -39,6 +39,7 @@ const TaskComments = ({ comments }) => {
               displayName={comment.displayName}
               createdAt={comment.createdAt}
               id={comment.id}
+              comment={comment}
             />
           ))}
         </div>

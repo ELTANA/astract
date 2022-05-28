@@ -9,13 +9,17 @@ $green-alt: #008000cc;
 $green-dark: #00c800;
 $green-light: #c6f7c6;
 $green-light-alt: #f0fff0;
+$white: #fff;
 $white-smoke: #f5f5f5;
 $mild-red: #dc3545;
 $dark-red: #ff0019;
 $mild-blue-alt: #0d6efd;
 $mild-blue: #0066ff;
 $violet: #6c63ff;
-$gray: #909090;
+$violet-alt: #544bff;
+$mild-violet: #8882ff;
+$gray: #d4d4d4;
+// $gray: #909090;
 
 @keyframes pulse {
 
@@ -25,7 +29,33 @@ $gray: #909090;
   }
 
   50% {
-    transform: scale(1.2);
+    transform: scale(1.5);
+  }
+}
+
+@keyframes slide_up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide_right {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
   }
 }
 
@@ -108,7 +138,6 @@ $gray: #909090;
                 color: $mild-red;
                 text-align: end;
                 font-weight: 500;
-                // margin-left: auto;
 
                 p {
                   user-select: none;
@@ -132,8 +161,6 @@ $gray: #909090;
               width: 100%;
               display: flex;
               flex-direction: column;
-              // gap: 2rem;
-              // justify-content: space-between;
 
               .interactive {
                 width: 100%;
@@ -141,7 +168,6 @@ $gray: #909090;
                 margin-block-end: 3rem;
                 color: $base-font;
                 display: flex;
-                // flex-direction: column;
                 gap: 2rem;
 
                 .action_btns_wrapper {
@@ -155,7 +181,7 @@ $gray: #909090;
 
                   .action_btns_edit {
                     color: $violet;
-                    transition: all 700ms ease-in;
+                    transition: all 300ms ease-in;
 
                     &:hover {
                       background: $violet;
@@ -210,7 +236,7 @@ $gray: #909090;
                 .add_comment {
                   width: 100%;
                   max-width: 500px;
-                  background: #fff;
+                  background: $white;
                   margin-block: 0.5rem;
                   border-radius: 10px;
                   display: flex;
@@ -220,11 +246,12 @@ $gray: #909090;
                     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
                   textarea {
+                    min-height: 7rem;
                     border: none;
                     border-radius: 10px 10px 0 0;
                     padding: 0.7rem;
-                    font-size: 0.8rem;
-                    line-height: 1rem;
+                    font-size: 0.85rem;
+                    line-height: 1.1rem;
 
                     &:focus:invalid {
                       outline: 1px solid $mild-red;
@@ -238,14 +265,14 @@ $gray: #909090;
                   .comments_btn {
                     border: none;
                     outline: none;
-                    background: $mild-blue;
-                    color: $white-smoke;
-                    padding-block: 0.3rem;
+                    background: $violet;
+                    color: $white;
+                    padding-block: 0.5rem;
                     border-radius: 0 0 10px 10px;
-                    font-size: 0.75rem;
+                    font-size: 0.8rem;
 
                     &:hover {
-                      background: $mild-blue-alt;
+                      background: $violet-alt;
 
                     }
                   }
@@ -257,22 +284,20 @@ $gray: #909090;
                 display: flex;
                 flex-direction: column;
                 gap: 1rem;
+                overflow: hidden;
+                transition: all 1s ease-in;
 
                 .comment {
                   width: inherit;
                   background: white;
                   color: $base-bg-alt;
                   border-radius: 10px;
-                  // padding-block: 1rem;
-                  // padding-inline: 1rem;
                   margin-block-end: 1rem;
                   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
                   display: flex;
-                  // align-items: center;
-                  justify-content: space-between;
 
                   .vote {
-                    width: 10%;
+                    min-width: 10%;
                     background: $green-light-alt;
                     color: $base-bg-alt;
                     padding-block: 1rem;
@@ -282,13 +307,17 @@ $gray: #909090;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    justify-content: space-between;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    overflow: hidden;
+                    transition: all 500ms ease-in !important;
 
                     .vote_count {
                       user-select: none;
-                      font-size: 1.5rem;
+                      font-size: 1.3rem;
                       font-weight: 600;
                       color: $base-bg-alt;
+                      animation: slide_up 500ms linear 100ms forwards;
 
                       &.positive {
                         color: $green-dark;
@@ -302,6 +331,7 @@ $gray: #909090;
                     .vote_btn {
                       cursor: pointer;
                       color: $base-bg-alt;
+                      font-size: 1.3rem;
                       transition: all 500ms ease-in;
 
                       &:hover:first-of-type {
@@ -324,8 +354,9 @@ $gray: #909090;
 
                   .comment_container {
                     width: 90%;
-                    padding-block: 1rem;
-                    padding-inline: 1.5rem;
+                    padding-block-start: 1rem;
+                    padding-block-end: 1.5rem;
+                    padding-inline: 1rem;
 
                     .comment_content {
                       user-select: none;
@@ -340,11 +371,11 @@ $gray: #909090;
                           color: $violet;
 
                           &:first-child {
-                            margin-inline-end: 0.5rem;
+                            margin-inline-end: 0.2rem;
                           }
 
                           &:last-child {
-                            margin-inline-start: 0.5rem;
+                            margin-inline-start: 0.2rem;
                           }
                         }
                       }
@@ -354,6 +385,8 @@ $gray: #909090;
                       user-select: none;
                       padding-block: 0.5rem;
                       display: flex;
+                      flex-wrap: wrap;
+                      gap: 0.5rem;
                       align-items: center;
 
                       .comment_name {
@@ -377,29 +410,43 @@ $gray: #909090;
                         font-size: 0.7rem;
                         color: rgba($color: $base-bg-alt, $alpha: 0.5);
                       }
+                    }
 
-                      .delete_comment {
+                    .comment_btns {
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 2rem;
+
+                      .delete_comment,
+                      .edit_comment {
                         cursor: pointer;
-                        color: $mild-red;
-                        margin-left: auto;
-                        width: 1.8rem;
-                        height: 1.8rem;
+                        margin-top: 0.5rem;
+                        width: 2rem;
+                        height: 2rem;
                         border-radius: 50%;
                         box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
                           rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        font-size: 0.9rem;
+                        font-size: 1rem;
 
                         &:hover {
-                          background: $mild-red;
-                          color: $white-smoke;
                           box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 5px 4px;
                         }
                       }
-                    }
 
+                      .delete_comment {
+                        background: $mild-red;
+                        color: $white-smoke;
+                      }
+
+                      .edit_comment {
+                        background: $violet;
+                        color: $white-smoke;
+                      }
+                    }
                   }
 
                 }
@@ -586,6 +633,10 @@ $gray: #909090;
           justify-content: flex-end;
           gap: 1rem;
         }
+      }
+
+      .vote {
+        min-width: 15%;
       }
     }
   }
