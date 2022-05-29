@@ -9,7 +9,7 @@ import { RiChatOffLine } from 'react-icons/ri'
 // STYLES
 import styles from './DashBoard.module.scss'
 
-const TaskComments = ({ comments }) => {
+const TaskComments = ({ task, comments }) => {
   return (
     <>
       {!comments ? (
@@ -40,6 +40,7 @@ const TaskComments = ({ comments }) => {
               createdAt={comment.createdAt}
               id={comment.id}
               comment={comment}
+              task={task}
             />
           ))}
         </div>
@@ -52,5 +53,6 @@ export default TaskComments
 
 TaskComments.propTypes = {
   vote: PropTypes.number,
-  comments: PropTypes.array
+  comments: PropTypes.array,
+  task: PropTypes.object
 }

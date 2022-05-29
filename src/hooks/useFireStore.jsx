@@ -166,23 +166,14 @@ export const useFireStore = (collection, comments) => {
   }
 
   // DELETE COMMENT
-  // const deleteComment = async (id) => {
-  //   dispatch({ type: 'IS_PENDING' })
-
-  //   try {
-  //     await astractFirestore.collection(collection).doc(id).delete()
-  //     dispatchIfNotCancelled({ type: 'DELETED_COMMENT' })
-  //   } catch (err) {
-  //     dispatchIfNotCancelled({ type: 'ERROR', payload: 'Could not delete Comment!' })
-  //   }
-  // }
-
-  // DELETE COMMENT
-  const deleteComment = async (id, updates) => {
+  const deleteComment = async (comments, comment) => {
     dispatch({ type: 'IS_PENDING' })
 
     try {
-      const deletedComment = await ref.doc(id).update({ updates: updates.arrayRemove(id) })
+      const deletedComment = await ref.doc(comments).update({
+        ...comments,
+        comments: comments.comment.arrayRemove(comment)
+      })
       dispatchIfNotCancelled({ type: 'DELETED_COMMENT', payload: deletedComment })
       return deletedComment
     } catch (error) {

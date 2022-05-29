@@ -11,8 +11,8 @@ import styles from './DashBoard.module.scss'
 import { useState } from 'react'
 import { useFireStore } from '../../hooks/useFireStore'
 
-const Comment = ({ comment, content, displayName, createdAt, id }) => {
-  const { deleteTaskDoc } = useFireStore('Tasks.comments')
+const Comment = ({ task, comment, content, displayName, createdAt, id }) => {
+  const { deleteComment } = useFireStore('Tasks')
   // console.log(useFireStore('Tasks.comments'))
 
   const [voteCount, setVoteCount] = useState(0)
@@ -45,17 +45,20 @@ const Comment = ({ comment, content, displayName, createdAt, id }) => {
         <div className={styles.comment_details}>
           <span
             className={styles.delete_comment}
-            onClick={() => {
-              // deleteTaskDoc(id)
-              // console.log(comment)
-            }}>
+            onClick={
+              //   console.log(task)
+              //   console.log(task.comments)
+              //   console.log(comment)
+              async () => {
+                await deleteComment(task.comments, comment)
+              }
+            }>
             <BsTrash />
           </span>
 
           <span
             className={styles.edit_comment}
             onClick={() => {
-              // console.log(id)
               // console.log(comment)
             }}>
             <FaRegEdit />
@@ -104,6 +107,8 @@ export default Comment
 
 Comment.propTypes = {
   comment: PropTypes.object,
+  comments: PropTypes.array,
+  task: PropTypes.object,
   content: PropTypes.string,
   displayName: PropTypes.string,
   createdAt: PropTypes.object,
@@ -112,3 +117,10 @@ Comment.propTypes = {
   // key: PropTypes.string,
   // vote: PropTypes.number,
 }
+
+// onClick={() => {
+//               // console.log(task)
+//               // console.log(task.comments)
+//               // console.log(comment)
+//               // deleteComment(task, task.comments, comment)
+//             }}
