@@ -11,6 +11,7 @@ import styles from './Admin.module.scss'
 import { GoCommentDiscussion } from 'react-icons/go'
 import { RiChatOffLine } from 'react-icons/ri'
 import AdminComments from './AdminComments'
+import AddComment from './AdminAddCommments'
 
 const AllTaskLists = ({ tasks }) => {
   // console.log('tasks:', tasks)
@@ -43,6 +44,7 @@ const AllTaskLists = ({ tasks }) => {
             </div>
 
             <>
+              <AddComment taskId={task.id} taskComments={task.comments} />
               {!task.comments ? (
                 <span>Deprecated Task</span>
               ) : (
