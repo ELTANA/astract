@@ -117,7 +117,6 @@ const TaskForm = ({ uid, displayName }) => {
 
         <Button classNames={`form-control ${styles.taskBtn}`} buttonText='Add Task' />
       </Form>
-      {/* </Card.Body> */}
     </Card>
   )
 }
@@ -127,5 +126,4 @@ export default TaskForm
 TaskForm.propTypes = {
   uid: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired
-  // uid: PropTypes.any.isRequired
 }

@@ -43,21 +43,6 @@ const Comment = ({ comment, content, displayName, createdAt, id }) => {
         </div>
 
         <div className={styles.comment_details}>
-          <span className={styles.comment_name}>
-            <span className={styles.comment_icon}>
-              <RiChatNewLine />
-            </span>
-            {`by ${displayName}`}
-          </span>
-
-          <span className={styles.comment_time}>
-            {` at 
-                  ${createdAt.toDate().toLocaleTimeString()} on 
-                  ${createdAt.toDate().toDateString()}`}
-          </span>
-        </div>
-
-        <div className={styles.comment_btns}>
           <span
             className={styles.delete_comment}
             onClick={() => {
@@ -74,6 +59,19 @@ const Comment = ({ comment, content, displayName, createdAt, id }) => {
               // console.log(comment)
             }}>
             <FaRegEdit />
+          </span>
+
+          <span className={styles.comment_name}>
+            <span className={styles.comment_icon}>
+              <RiChatNewLine />
+            </span>
+            {`by ${displayName}`}
+          </span>
+
+          <span className={styles.comment_time}>
+            {` at 
+                  ${createdAt.toDate().toLocaleTimeString()} on 
+                  ${createdAt.toDate().toDateString()}`}
           </span>
         </div>
       </div>

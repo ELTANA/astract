@@ -15,15 +15,6 @@ const DashBoard = () => {
   const { user } = useAuthContext()
   const { displayName } = user // User's Details
 
-  // const { displayName, uid } = user // User's Details
-  // console.log('Dashboard:', user.displayName)
-  // const { tasks, error } = useCollection(
-  //   'Tasks'
-  //   ) //TaskLists for all users
-
-  // //TaskLists for ALL USERS(ADMIN ACCESS)
-  // const { tasks, error } = useCollection('Tasks', null, ['createdAt', 'desc'])
-
   //TaskLists for A PARTICULAR USER
   const { tasks, error } = useCollection('Tasks', ['uid', '==', user.uid], ['createdAt', 'desc'])
 
@@ -39,7 +30,7 @@ const DashBoard = () => {
         <Container>
           <section className={styles.dashboard}>
             <article>
-              {tasks && <h1>{displayName}&apos;s Tasks</h1>}
+              {tasks && <h1>{displayName}&apos;s Tasks List</h1>}
               <div className={styles.tasks}>
                 {error && <p>{error}</p>}
                 {tasks && <TaskLists tasks={tasks} />}

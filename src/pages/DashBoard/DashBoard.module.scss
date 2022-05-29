@@ -85,7 +85,6 @@ $gray: #d4d4d4;
         padding-block-start: 3%;
 
         ul {
-          // padding-inline: 5%;
           padding-block-end: 5%;
           padding-inline-start: 0;
           width: 100%;
@@ -98,12 +97,11 @@ $gray: #d4d4d4;
             background: $white-smoke;
             border-radius: 10px;
             margin-block-end: 10%;
-            padding: 2rem;
+            padding-inline: 2rem;
+            padding-block: 2rem 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            // gap: 5%;
-            // justify-content: space-between;
 
             .task_details {
               width: 100%;
@@ -164,8 +162,7 @@ $gray: #d4d4d4;
 
               .interactive {
                 width: 100%;
-                margin-block-start: 2rem;
-                margin-block-end: 3rem;
+                margin-block: 1.5rem;
                 color: $base-font;
                 display: flex;
                 gap: 2rem;
@@ -309,8 +306,8 @@ $gray: #d4d4d4;
                     align-items: center;
                     justify-content: center;
                     gap: 0.5rem;
-                    overflow: hidden;
-                    transition: all 500ms ease-in !important;
+                    // overflow: hidden;
+                    transition: all 500ms ease-in;
 
                     .vote_count {
                       user-select: none;
@@ -353,9 +350,8 @@ $gray: #d4d4d4;
                   }
 
                   .comment_container {
-                    width: 90%;
-                    padding-block-start: 1rem;
-                    padding-block-end: 1.5rem;
+                    min-width: 90%;
+                    padding-block: 1rem;
                     padding-inline: 1rem;
 
                     .comment_content {
@@ -386,42 +382,13 @@ $gray: #d4d4d4;
                       padding-block: 0.5rem;
                       display: flex;
                       flex-wrap: wrap;
-                      gap: 0.5rem;
+                      column-gap: 0.5rem;
+                      row-gap: 1rem;
                       align-items: center;
-
-                      .comment_name {
-                        background: $violet;
-                        color: $white-smoke;
-                        font-size: 0.8rem;
-                        word-spacing: 0.4rem;
-                        padding-inline: 1rem;
-                        padding-block: 0.2rem;
-                        border-radius: 1rem;
-                        margin-inline-end: 0.2rem;
-
-                        .comment_icon {
-                          margin-inline-end: 0.5rem;
-                          color: white;
-                          font-weight: bolder;
-                        }
-                      }
-
-                      .comment_time {
-                        font-size: 0.7rem;
-                        color: rgba($color: $base-bg-alt, $alpha: 0.5);
-                      }
-                    }
-
-                    .comment_btns {
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      gap: 2rem;
 
                       .delete_comment,
                       .edit_comment {
                         cursor: pointer;
-                        margin-top: 0.5rem;
                         width: 2rem;
                         height: 2rem;
                         border-radius: 50%;
@@ -445,6 +412,29 @@ $gray: #d4d4d4;
                       .edit_comment {
                         background: $violet;
                         color: $white-smoke;
+                        margin-inline: 0.8rem;
+                      }
+
+                      .comment_name {
+                        background: $violet;
+                        color: $white-smoke;
+                        font-size: 0.9rem;
+                        word-spacing: 0.4rem;
+                        padding-inline: 1rem;
+                        padding-block: 0.4rem;
+                        border-radius: 1rem;
+                        margin-inline-end: 0.2rem;
+
+                        .comment_icon {
+                          margin-inline-end: 0.5rem;
+                          color: white;
+                          font-weight: bolder;
+                        }
+                      }
+
+                      .comment_time {
+                        font-size: 0.7rem;
+                        color: rgba($color: $base-bg-alt, $alpha: 0.5);
                       }
                     }
                   }
@@ -456,6 +446,7 @@ $gray: #d4d4d4;
                   align-items: center;
                   justify-content: flex-start;
                   gap: 1rem;
+                  padding-block-end: 0.5rem;
 
                   span {
                     font-size: 1.1rem;
@@ -463,8 +454,8 @@ $gray: #d4d4d4;
 
                   .toggle_btn {
                     cursor: pointer;
-                    width: 2rem;
-                    height: 2rem;
+                    margin-block: 1rem;
+                    padding: 0.5rem;
                     color: $violet;
                     border-radius: 50%;
                     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
