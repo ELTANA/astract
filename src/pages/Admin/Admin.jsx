@@ -11,7 +11,7 @@ function Admin() {
   const { user } = useAuthContext()
   // console.log(user)
 
-  // //TaskLists for ALL USERS(ADMIN ACCESS)
+  //TaskLists for ALL USERS(ADMIN ACCESS)
   const { tasks, error } = useCollection('Tasks', null, ['createdAt', 'desc'])
   // console.log('tasks:', tasks)
   // console.log('error:', error)
@@ -25,14 +25,9 @@ function Admin() {
       />
       <section className={styles.admin_container}>
         <Container>
-          <h1 className='text-center'>Admin Dashboard</h1>
-          <section className={styles.adminboard}>
-            <article>
-              <div className={styles.task_list}>{tasks && <AllTaskLists tasks={tasks} />}</div>
-            </article>
+          <h1 className={`text-center ${styles.heading}`}>Admin Dashboard</h1>
 
-            {/* <aside>Aside</aside> */}
-          </section>
+          <section className={styles.adminboard}>{tasks && <AllTaskLists tasks={tasks} />}</section>
         </Container>
       </section>
     </>

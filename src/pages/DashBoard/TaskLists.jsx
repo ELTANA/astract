@@ -3,13 +3,13 @@ import { PropTypes } from 'prop-types'
 import { useFireStore } from '../../hooks/useFireStore'
 import { Modal } from 'react-bootstrap'
 
-// REACT ICONS
+// COMPONENTS
+import AddComment from './AddComment'
+import TaskComments from './TaskComment'
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
 
 // STYLES
 import styles from './DashBoard.module.scss'
-import AddComment from './AddComment'
-import TaskComments from './TaskComment'
 
 const TaskLists = ({ tasks }) => {
   const { deleteTaskDoc } = useFireStore('Tasks')

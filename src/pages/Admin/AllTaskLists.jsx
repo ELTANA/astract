@@ -1,35 +1,81 @@
-// import { useState } from 'react'
 import { PropTypes } from 'prop-types'
 // import { useFireStore } from '../../hooks/useFireStore'
 
+// COMPONENTS
+import { FiFolderPlus } from 'react-icons/fi'
+import { BiCategory } from 'react-icons/bi'
+import { MdTimer } from 'react-icons/md'
+
 // STYLES
 import styles from './Admin.module.scss'
+import { GoCommentDiscussion } from 'react-icons/go'
+import { RiChatOffLine } from 'react-icons/ri'
+import AdminComments from './AdminComments'
 
 const AllTaskLists = ({ tasks }) => {
   // console.log('tasks:', tasks)
   return (
-    <ul>
+    <ul className={styles.task_list}>
       {tasks.map((task) => (
-        <li key={task.id}>
-          <div className={styles.details}>
-            {task.displayName && (
-              <div className={styles.name}>
-                <span className={styles.span_title}>Creator</span>
-                <span> {task.displayName}</span>
-              </div>
-            )}
+        <li key={task.id} className={styles.task}>
+          <h2 className={styles.task_title}> {task.taskName}</h2>
 
-            {task.taskDeadline && (
-              <div className={styles.deadline}>
-                <span className={styles.span_title}>Deadline</span>
-                <span>{task.taskDeadline}</span>
-              </div>
-            )}
-          </div>
+          <div className={styles.task_details}>
+            <div className={styles.details}>
+              {task.displayName && (
+                <div className={styles.creator}>
+                  <FiFolderPlus />
+                  <span> {task.displayName}</span>
+                </div>
+              )}
 
-          <div className={styles.title_div}>
-            <h2 className={styles.title}> {task.taskName}</h2>
-            <span className={styles.category}>{task.taskCategory}</span>
+              <div className={styles.category}>
+                <BiCategory />
+                <span>{task.taskCategory}</span>
+              </div>
+
+              {task.taskDeadline && (
+                <div className={styles.deadline}>
+                  <MdTimer />
+                  <span>{task.taskDeadline}</span>
+                </div>
+              )}
+            </div>
+
+            <>
+              {!task.comments ? (
+                <span>Deprecated Task</span>
+              ) : (
+                <div className={styles.task_comments}>
+                  {task.comments.length > 0 ? (
+                    <div className={styles.comment_toggle__btn}>
+                      <span>Comments</span>
+                      <span className={styles.toggle_btn}>
+                        <GoCommentDiscussion />
+                      </span>
+                    </div>
+                  ) : (
+                    <div className={styles.comment_toggle__btn}>
+                      <span>No Comments</span>
+                      <span className={styles.toggle_btn}>
+                        <RiChatOffLine />
+                      </span>
+                    </div>
+                  )}
+
+                  {task.comments.map((comment) => (
+                    <AdminComments
+                      key={comment.id}
+                      content={comment.content}
+                      displayName={comment.displayName}
+                      createdAt={comment.createdAt}
+                      id={comment.id}
+                      comment={comment}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
           </div>
         </li>
       ))}
