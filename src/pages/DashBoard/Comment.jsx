@@ -104,7 +104,7 @@ const Comment = ({ task, comment, content, displayName, createdAt, id }) => {
               <BsTrash />
             </span>
 
-            <UpdateComment comments={task.comments} task={task} />
+            <UpdateComment comments={task.comments} task={task} content={content} id={id} />
 
             <span className={styles.comment_name}>
               <span className={styles.comment_icon}>
