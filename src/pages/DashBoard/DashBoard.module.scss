@@ -415,6 +415,70 @@ $gray: #d4d4d4;
                         margin-inline: 0.8rem;
                       }
 
+                      .updateComment {
+                        background-color: $white;
+                        color: $base-bg-alt;
+                        display: flex;
+                        align-items: center;
+
+                        textarea {
+                          border: none;
+                          outline: 2px solid $gray;
+                          border-radius: 1rem;
+                          padding: 0.3rem;
+                          text-indent: 0.5rem;
+
+                          &:focus {
+                            border: none;
+
+                            &:invalid {
+                              outline: 2px solid $mild-red;
+                            }
+
+                            &:valid {
+                              outline: 2px solid $green;
+                            }
+                          }
+                        }
+
+                        .update_btn_edit,
+                        .update_btn_close {
+                          cursor: pointer;
+                          width: 2rem;
+                          height: 2rem;
+                          padding: 0.3rem;
+                          border-radius: 50%;
+                          box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+                            rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+
+                          &:hover {
+                            box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 5px 4px;
+                          }
+                        }
+
+                        .update_btn_close {
+                          color: $mild-red;
+
+                          &:hover {
+                            background: $mild-red;
+                            color: $white-smoke;
+                          }
+                        }
+
+                        .update_btn_edit {
+                          margin-inline: 0.8rem;
+                          color: $green-alt;
+
+                          &:hover {
+                            background: $green-alt;
+                            color: $white-smoke;
+                          }
+                        }
+                      }
+
                       .comment_name {
                         background: $violet;
                         color: $white-smoke;

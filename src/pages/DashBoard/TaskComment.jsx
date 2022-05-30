@@ -16,18 +16,18 @@ const TaskComments = ({ task, comments }) => {
         <span>Deprecated Task</span>
       ) : (
         <div className={styles.task_comments}>
-          {comments.length > 0 ? (
-            <div className={styles.comment_toggle__btn}>
-              <span>Comments</span>
-              <span className={styles.toggle_btn}>
-                <GoCommentDiscussion />
-              </span>
-            </div>
-          ) : (
+          {comments.length < 1 ? (
             <div className={styles.comment_toggle__btn}>
               <span>No Comments</span>
               <span className={styles.toggle_btn}>
                 <RiChatOffLine />
+              </span>
+            </div>
+          ) : (
+            <div className={styles.comment_toggle__btn}>
+              <span>Comments</span>
+              <span className={styles.toggle_btn}>
+                <GoCommentDiscussion />
               </span>
             </div>
           )}
