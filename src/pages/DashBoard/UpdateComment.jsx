@@ -29,7 +29,7 @@ const UpdateComment = ({ comments, task, content, id }) => {
             content: updateInput
           }
         })
-      console.log('update')
+      // console.log('update')
 
       // if (res) {
       setUpdateDiv(false)
