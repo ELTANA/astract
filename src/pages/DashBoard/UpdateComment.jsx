@@ -49,7 +49,7 @@ const UpdateComment = ({ comments, task, content, id }) => {
           setCommentsId(id)
           // setCommentsId(task.id)
           // console.log(commentsId)
-          console.log(content)
+          // console.log(content)
         }}>
         <FaRegEdit />
       </span>
