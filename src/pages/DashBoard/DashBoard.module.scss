@@ -506,6 +506,7 @@ $gray: #d4d4d4;
                 }
 
                 .comment_toggle__btn {
+                  cursor: pointer;
                   display: flex;
                   align-items: center;
                   justify-content: flex-start;
@@ -514,6 +515,10 @@ $gray: #d4d4d4;
 
                   span {
                     font-size: 1.1rem;
+
+                    &:hover {
+                      color: $violet;
+                    }
                   }
 
                   .toggle_btn {

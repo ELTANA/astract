@@ -8,8 +8,11 @@ import { RiChatOffLine } from 'react-icons/ri'
 
 // STYLES
 import styles from './DashBoard.module.scss'
+import { useState } from 'react'
 
 const TaskComments = ({ task, comments }) => {
+  const [toggleComments, setToggleComments] = useState(true)
+
   return (
     <>
       {!comments ? (
@@ -24,25 +27,32 @@ const TaskComments = ({ task, comments }) => {
               </span>
             </div>
           ) : (
-            <div className={styles.comment_toggle__btn}>
-              <span>Comments</span>
-              <span className={styles.toggle_btn}>
-                <GoCommentDiscussion />
-              </span>
-            </div>
-          )}
+            <>
+              <div
+                className={styles.comment_toggle__btn}
+                onClick={() => {
+                  setToggleComments((prevState) => !prevState)
+                }}>
+                <span>Toggle Comments</span>
+                <span className={styles.toggle_btn}>
+                  <GoCommentDiscussion />
+                </span>
+              </div>
 
-          {comments.map((comment) => (
-            <Comment
-              key={comment.id}
-              content={comment.content}
-              displayName={comment.displayName}
-              createdAt={comment.createdAt}
-              id={comment.id}
-              comment={comment}
-              task={task}
-            />
-          ))}
+              {toggleComments &&
+                comments.map((comment) => (
+                  <Comment
+                    key={comment.id}
+                    content={comment.content}
+                    displayName={comment.displayName}
+                    createdAt={comment.createdAt}
+                    id={comment.id}
+                    comment={comment}
+                    task={task}
+                  />
+                ))}
+            </>
+          )}
         </div>
       )}
     </>
