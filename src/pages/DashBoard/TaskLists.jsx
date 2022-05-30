@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { PropTypes } from 'prop-types'
 import { useFireStore } from '../../hooks/useFireStore'
-import { Modal } from 'react-bootstrap'
+import { astractFirestore } from '../../firebase/config'
 
 // COMPONENTS
 import AddComment from './AddComment'
 import TaskComments from './TaskComment'
+import { Modal } from 'react-bootstrap'
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
 
 // STYLES
@@ -13,12 +14,11 @@ import styles from './DashBoard.module.scss'
 
 const TaskLists = ({ tasks }) => {
   const { deleteTaskDoc } = useFireStore('Tasks')
-  // console.log(response)
 
   //  UPDATE TASK MODAL
   const [show, setShow] = useState(false)
+  const [taskId, setTaskId] = useState('')
   const handleClose = () => setShow(false)
-  const showModal = () => setShow(true)
 
   // MODAL FORM STATES
   const [taskName, setTaskName] = useState('')
@@ -28,8 +28,39 @@ const TaskLists = ({ tasks }) => {
   // UPDATE TASK
   const updateOldTask = (e) => {
     e.preventDefault()
+    // console.log(taskId)
+    // console.log(taskDeadline)
 
-    //
+    if (taskName == '') {
+      return tasks.taskName
+    }
+    if (taskCategory == '') {
+      return tasks.taskCategory
+    }
+    if (taskDeadline == '') {
+      return tasks.taskDeadline
+    }
+
+    const update = async () => {
+      try {
+        const res = await astractFirestore.collection('Tasks').doc(taskId).update({
+          taskName,
+          taskCategory,
+          taskDeadline
+        })
+
+        // if (res) {
+        setShow(false)
+        setTaskId('')
+        setTaskName('')
+        setTaskCategory('')
+        setTaskDeadline('')
+        // }
+      } catch (err) {
+        alert(err.message)
+      }
+    }
+    update()
   }
 
   return (
@@ -109,19 +140,27 @@ const TaskLists = ({ tasks }) => {
           <div className={styles.interactive_div}>
             <div className={styles.interactive}>
               <div className={styles.action_btns_wrapper}>
-                <div className={styles.action_btns_edit}>
+                <div
+                  className={styles.action_btns_edit}
+                  onClick={(e) => {
+                    setShow(true)
+                    setTaskId(task.id)
+                    setTaskName(task.taskName)
+                    setTaskCategory(task.taskCategory)
+                    setTaskDeadline(task.taskDeadline)
+                  }}>
                   <span className={styles.action_btn}>
-                    <BsPencilSquare onClick={showModal} />
+                    <BsPencilSquare />
                   </span>
                   <div className={styles.title}>Edit Task</div>
                 </div>
 
-                <div className={styles.action_btns_delete}>
-                  <span
-                    className={styles.action_btn}
-                    onClick={() => {
-                      deleteTaskDoc(task.id)
-                    }}>
+                <div
+                  className={styles.action_btns_delete}
+                  onClick={() => {
+                    deleteTaskDoc(task.id)
+                  }}>
+                  <span className={styles.action_btn}>
                     <BsTrash task={task} />
                   </span>
 

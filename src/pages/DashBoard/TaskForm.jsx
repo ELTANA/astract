@@ -25,7 +25,6 @@ const TaskForm = ({ uid, displayName }) => {
   const [taskCategory, setTaskCategory] = useState('')
   const onTaskCategoryChange = (e) => {
     setTaskCategory(e.target.value)
-    //
   }
 
   // TASK DEADLINE CONTROLLLED INPUTS
@@ -50,15 +49,19 @@ const TaskForm = ({ uid, displayName }) => {
   const handleAddTask = (e) => {
     e.preventDefault()
 
-    addTaskDoc({
-      uid: uid,
-      id: uuid(),
-      displayName: displayName,
-      taskName,
-      taskCategory,
-      taskDeadline,
-      comments: []
-    })
+    if ((taskName || taskCategory) == '' || taskDeadline == '') {
+      return
+    } else {
+      addTaskDoc({
+        uid: uid,
+        id: uuid(),
+        displayName: displayName,
+        taskName,
+        taskCategory,
+        taskDeadline,
+        comments: []
+      })
+    }
   }
 
   useEffect(() => {

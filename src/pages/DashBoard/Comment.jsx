@@ -72,7 +72,7 @@ const Comment = ({ task, comment, content, displayName, createdAt, id }) => {
           </span>
 
           <span className={styles.comment_time}>
-            {` at 
+            {`at 
                   ${createdAt.toDate().toLocaleTimeString()} on 
                   ${createdAt.toDate().toDateString()}`}
           </span>
