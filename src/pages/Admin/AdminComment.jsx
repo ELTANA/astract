@@ -11,7 +11,7 @@ import styles from './Admin.module.scss'
 import { useState } from 'react'
 import { useFireStore } from '../../hooks/useFireStore'
 
-const AdminComments = ({ comment, content, displayName, createdAt, id }) => {
+const AdminComment = ({ comment, content, displayName, createdAt, id }) => {
   const { deleteTaskDoc } = useFireStore('Tasks.comments')
   // console.log(useFireStore('Tasks.comments'))
 
@@ -102,9 +102,9 @@ const AdminComments = ({ comment, content, displayName, createdAt, id }) => {
   )
 }
 
-export default AdminComments
+export default AdminComment
 
-AdminComments.propTypes = {
+AdminComment.propTypes = {
   comment: PropTypes.object,
   content: PropTypes.string,
   displayName: PropTypes.string,

@@ -5,7 +5,7 @@ import { useFireStore } from '../../hooks/useFireStore'
 // COMPONENTS
 import { GoCommentDiscussion } from 'react-icons/go'
 import { RiChatOffLine } from 'react-icons/ri'
-import AdminComments from './AdminComments'
+import AdminComment from './AdminComment'
 // import Comment from './Comment'
 
 // STYLES
@@ -42,7 +42,7 @@ const AdminTaskComments = ({ task, comments }) => {
 
               {toggleComments &&
                 comments.map((comment) => (
-                  <AdminComments
+                  <AdminComment
                     key={comment.id}
                     content={comment.content}
                     displayName={comment.displayName}

@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import { PropTypes } from 'prop-types'
-// import { useFireStore } from '../../hooks/useFireStore'
 
 // COMPONENTS
 import { FiFolderPlus } from 'react-icons/fi'
@@ -12,12 +10,8 @@ import styles from './Admin.module.scss'
 import { RiChatOffLine } from 'react-icons/ri'
 import AddComment from './AdminAddCommments'
 import AdminTaskComments from './AdminTaskComments'
-// import AdminComments from './AdminComments'
-// import { GoCommentDiscussion } from 'react-icons/go'
 
 const AllTaskLists = ({ tasks }) => {
-  const [toggleComments, setToggleComments] = useState(true)
-
   return (
     <ul className={styles.task_list}>
       {tasks.map((task) => (
@@ -61,28 +55,7 @@ const AllTaskLists = ({ tasks }) => {
                     </div>
                   ) : (
                     <AdminTaskComments comments={task.comments} task={task} />
-
-                    // <div
-                    //   className={styles.comment_toggle__btn}
-                    //   onClick={() => setToggleComments((prevState) => !prevState)}>
-                    //   <span>Toggle Comments</span>
-                    //   <span className={styles.toggle_btn}>
-                    //     <GoCommentDiscussion />
-                    //   </span>
-                    // </div>
                   )}
-
-                  {/* {toggleComments &&
-                    task.comments.map((comment) => (
-                      <AdminComments
-                        key={comment.id}
-                        content={comment.content}
-                        displayName={comment.displayName}
-                        createdAt={comment.createdAt}
-                        id={comment.id}
-                        comment={comment}
-                      />
-                    ))} */}
                 </div>
               )}
             </>
@@ -105,8 +78,3 @@ AllTaskLists.propTypes = {
     })
   )
 }
-// .propTypes = {
-//   linkText: PropTypes.string,
-//   onSubmit: PropTypes.func.isRequired,
-//   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
-// }
