@@ -420,6 +420,8 @@ $gray: #d4d4d4;
                         color: $base-bg-alt;
                         display: flex;
                         flex-wrap: wrap;
+                        row-gap: 0.5rem;
+                        margin-block-end: 1rem;
                         align-items: center;
 
                         textarea {
