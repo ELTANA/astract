@@ -9,7 +9,7 @@ import { MdCheck } from 'react-icons/md'
 import styles from './DashBoard.module.scss'
 
 const UpdateComment = () => {
-  const [updateDiv, setUpdateDiv] = useState(true)
+  const [updateDiv, setUpdateDiv] = useState(false)
   return (
     <>
       <span
