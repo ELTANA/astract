@@ -283,45 +283,17 @@ $deadline: #ff4658;
                 padding-block: 0.5rem;
                 display: flex;
                 flex-wrap: wrap;
-                gap: 0.5rem;
+                column-gap: 0.5rem;
+                row-gap: 1rem;
                 align-items: center;
-
-                .comment_name {
-                  background: $violet;
-                  color: $white-smoke;
-                  font-size: 0.8rem;
-                  word-spacing: 0.4rem;
-                  padding-inline: 1rem;
-                  padding-block: 0.2rem;
-                  border-radius: 1rem;
-                  margin-inline-end: 0.2rem;
-
-                  .comment_icon {
-                    margin-inline-end: 0.5rem;
-                    color: white;
-                    font-weight: bolder;
-                  }
-                }
-
-                .comment_time {
-                  font-size: 0.7rem;
-                  color: rgba($color: $base-bg-alt, $alpha: 0.5);
-                }
-              }
-
-              .comment_btns {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
 
                 .delete_comment,
                 .edit_comment {
                   cursor: pointer;
-                  margin-top: 0.5rem;
                   width: 2rem;
                   height: 2rem;
                   border-radius: 50%;
+                  margin-block-end: 1rem;
                   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
                     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
                   display: flex;
@@ -342,26 +314,124 @@ $deadline: #ff4658;
                 .edit_comment {
                   background: $violet;
                   color: $white-smoke;
+                  margin-inline: 0.8rem;
+                }
+
+                .updateComment {
+                  background-color: $white;
+                  color: $base-bg-alt;
+                  display: flex;
+                  flex-wrap: wrap;
+                  row-gap: 0.5rem;
+                  margin-block-end: 1rem;
+                  align-items: center;
+
+                  textarea {
+                    // max-width: 11rem;
+                    border: none;
+                    outline: 2px solid $gray;
+                    border-radius: 1rem;
+                    padding: 0.3rem;
+                    text-indent: 0.3rem;
+
+                    &:focus {
+                      border: none;
+
+                      &:invalid {
+                        outline: 2px solid $mild-red;
+                      }
+
+                      &:valid {
+                        outline: 2px solid $green;
+                      }
+                    }
+                  }
+
+                  .update_btn_edit,
+                  .update_btn_close {
+                    cursor: pointer;
+                    width: 2rem;
+                    height: 2rem;
+                    padding: 0.3rem;
+                    border-radius: 50%;
+                    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+                      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &:hover {
+                      box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 5px 4px;
+                    }
+                  }
+
+                  .update_btn_close {
+                    color: $mild-red;
+
+                    &:hover {
+                      background: $mild-red;
+                      color: $white-smoke;
+                    }
+                  }
+
+                  .update_btn_edit {
+                    margin-inline: 0.8rem;
+                    color: $green-alt;
+
+                    &:hover {
+                      background: $green-alt;
+                      color: $white-smoke;
+                    }
+                  }
+                }
+
+                .comment_name {
+                  background: $violet;
+                  color: $white-smoke;
+                  font-size: 0.9rem;
+                  word-spacing: 0.4rem;
+                  padding-inline: 1rem;
+                  padding-block: 0.4rem;
+                  margin-block-end: 1rem;
+                  margin-inline-end: 0.2rem;
+                  border-radius: 1rem;
+
+                  .comment_icon {
+                    margin-inline-end: 0.5rem;
+                    color: white;
+                    font-weight: bolder;
+                  }
+                }
+
+                .comment_time {
+                  margin-block-end: 1rem;
+                  font-size: 0.7rem;
+                  color: rgba($color: $base-bg-alt, $alpha: 0.5);
                 }
               }
             }
-
           }
 
           .comment_toggle__btn {
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             gap: 1rem;
+            padding-block-end: 0.5rem;
 
             span {
               font-size: 1.1rem;
+
+              &:hover {
+                color: $violet;
+              }
             }
 
             .toggle_btn {
               cursor: pointer;
-              width: 2rem;
-              height: 2rem;
+              margin-block: 1rem;
+              padding: 0.5rem;
               color: $violet;
               border-radius: 50%;
               box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
@@ -378,9 +448,7 @@ $deadline: #ff4658;
               }
             }
           }
-
         }
-
       }
     }
   }

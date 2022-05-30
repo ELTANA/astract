@@ -1,20 +1,21 @@
+import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { astractFirestore } from '../../firebase/config'
 
 // COMPONENETS
 import { RiChatNewLine } from 'react-icons/ri'
 import { BsTrash } from 'react-icons/bs'
-import { FaRegEdit } from 'react-icons/fa'
 import { BiDownvote, BiUpvote } from 'react-icons/bi'
+import AdminUpdateComment from './AdminUpdateComment'
 
 // STYLES
 import styles from './Admin.module.scss'
-import { useState } from 'react'
-import { useFireStore } from '../../hooks/useFireStore'
 
-const AdminComment = ({ comment, content, displayName, createdAt, id }) => {
-  const { deleteTaskDoc } = useFireStore('Tasks.comments')
-  // console.log(useFireStore('Tasks.comments'))
-
+const AdminComment = ({ task, comment, content, displayName, createdAt, id }) => {
+  const [updatedComment, setUpdatedComment] = useState(null)
+  const [commentsArray, setCommentsArray] = useState(null)
+  const [commentObj, setCommentObj] = useState(null)
+  const [taskId, setTaskId] = useState(null)
   const [voteCount, setVoteCount] = useState(0)
 
   const handleUpVote = () => {
@@ -31,74 +32,81 @@ const AdminComment = ({ comment, content, displayName, createdAt, id }) => {
     })
   }
 
+  const handleDeleteComment = () => {
+    const deleteComment = async () => {
+      const res = await astractFirestore
+        .collection('Tasks')
+        .doc(taskId)
+        .update({
+          comments: commentsArray.arrayRemove(commentObj.value)
+        })
+    }
+    deleteComment()
+  }
+
   return (
-    <div className={styles.comment}>
-      <div className={styles.comment_container}>
-        <div className={styles.comment_content}>
-          <p>
-            <span>“</span>
-            {content}
-            <span>”</span>
-          </p>
-        </div>
+    <>
+      <div className={styles.comment}>
+        <div className={styles.comment_container}>
+          <div className={styles.comment_content}>
+            <p>
+              <span>“</span>
+              {content}
+              <span>”</span>
+            </p>
+          </div>
 
-        <div className={styles.comment_details}>
-          <span className={styles.comment_name}>
-            <span className={styles.comment_icon}>
-              <RiChatNewLine />
+          <div className={styles.comment_details}>
+            <span
+              className={styles.delete_comment}
+              onClick={() => {
+                setTaskId(task.id)
+                setCommentsArray(task.comments)
+                setCommentObj(comment)
+                handleDeleteComment
+              }}>
+              <BsTrash />
             </span>
-            {`by ${displayName}`}
-          </span>
 
-          <span className={styles.comment_time}>
-            {` at 
+            <AdminUpdateComment comments={task.comments} task={task} content={content} id={id} />
+
+            <span className={styles.comment_name}>
+              <span className={styles.comment_icon}>
+                <RiChatNewLine />
+              </span>
+              {`by ${displayName}`}
+            </span>
+
+            <span className={styles.comment_time}>
+              {`at 
                   ${createdAt.toDate().toLocaleTimeString()} on 
                   ${createdAt.toDate().toDateString()}`}
-          </span>
+            </span>
+          </div>
         </div>
 
-        <div className={styles.comment_btns}>
-          <span
-            className={styles.delete_comment}
-            onClick={() => {
-              // deleteTaskDoc(id)
-              // console.log(comment)
-            }}>
-            <BsTrash />
+        <div className={styles.vote}>
+          <span className={styles.vote_btn} onClick={handleUpVote}>
+            <BiUpvote />
           </span>
 
           <span
-            className={styles.edit_comment}
-            onClick={() => {
-              // console.log(id)
-              // console.log(comment)
-            }}>
-            <FaRegEdit />
+            className={`${styles.vote_count} ${
+              voteCount >= 3
+                ? styles.positive
+                : voteCount < 3 && voteCount !== 0
+                ? styles.negative
+                : null
+            }`}>
+            {voteCount}
+          </span>
+
+          <span className={styles.vote_btn} onClick={handleDownVote}>
+            <BiDownvote />
           </span>
         </div>
       </div>
-
-      <div className={styles.vote}>
-        <span className={styles.vote_btn} onClick={handleUpVote}>
-          <BiUpvote />
-        </span>
-
-        <span
-          className={`${styles.vote_count} ${
-            voteCount >= 3
-              ? styles.positive
-              : voteCount < 3 && voteCount !== 0
-              ? styles.negative
-              : null
-          }`}>
-          {voteCount}
-        </span>
-
-        <span className={styles.vote_btn} onClick={handleDownVote}>
-          <BiDownvote />
-        </span>
-      </div>
-    </div>
+    </>
   )
 }
 
@@ -106,11 +114,10 @@ export default AdminComment
 
 AdminComment.propTypes = {
   comment: PropTypes.object,
+  comments: PropTypes.array,
+  task: PropTypes.object,
   content: PropTypes.string,
   displayName: PropTypes.string,
   createdAt: PropTypes.object,
   id: PropTypes.string
-  // comments: PropTypes.array,
-  // key: PropTypes.string,
-  // vote: PropTypes.number,
 }

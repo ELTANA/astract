@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { astractFirestore } from '../../firebase/config'
-// import { useFireStore } from '../../hooks/useFireStore'
 
 // COMPONENETS
 import { RiChatNewLine } from 'react-icons/ri'
@@ -13,9 +12,6 @@ import UpdateComment from './UpdateComment'
 import styles from './DashBoard.module.scss'
 
 const Comment = ({ task, comment, content, displayName, createdAt, id }) => {
-  // const { deleteComment } = useFireStore('Tasks')
-  // console.log(useFireStore('Tasks.comments'))
-  const [updatedComment, setUpdatedComment] = useState(null)
   const [commentsArray, setCommentsArray] = useState(null)
   const [commentObj, setCommentObj] = useState(null)
   const [taskId, setTaskId] = useState(null)
@@ -61,88 +57,69 @@ const Comment = ({ task, comment, content, displayName, createdAt, id }) => {
     // }
   }
 
-  const handleUpdateComment = () => {
-    // console.log(taskId)
-    // console.log(taskDeadline)
-
-    const update = async () => {
-      const res = await astractFirestore
-        .collection('Tasks')
-        .doc(taskId)
-        .update({
-          comments: {
-            content: updatedComment
-          }
-        })
-    }
-    update()
-  }
-
   return (
-    <>
-      <div className={styles.comment}>
-        <div className={styles.comment_container}>
-          <div className={styles.comment_content}>
-            <p>
-              <span>“</span>
-              {content}
-              <span>”</span>
-            </p>
-          </div>
-
-          <div className={styles.comment_details}>
-            <span
-              className={styles.delete_comment}
-              onClick={() => {
-                setTaskId(task.id)
-                setCommentsArray(task.comments)
-                setCommentObj(comment)
-                // console.log(task.comments)
-                // console.log('CT', comment)
-                handleDeleteComment
-              }}>
-              <BsTrash />
-            </span>
-
-            <UpdateComment comments={task.comments} task={task} content={content} id={id} />
-
-            <span className={styles.comment_name}>
-              <span className={styles.comment_icon}>
-                <RiChatNewLine />
-              </span>
-              {`by ${displayName}`}
-            </span>
-
-            <span className={styles.comment_time}>
-              {`at 
-                  ${createdAt.toDate().toLocaleTimeString()} on 
-                  ${createdAt.toDate().toDateString()}`}
-            </span>
-          </div>
+    <div className={styles.comment}>
+      <div className={styles.comment_container}>
+        <div className={styles.comment_content}>
+          <p>
+            <span>“</span>
+            {content}
+            <span>”</span>
+          </p>
         </div>
 
-        <div className={styles.vote}>
-          <span className={styles.vote_btn} onClick={handleUpVote}>
-            <BiUpvote />
-          </span>
-
+        <div className={styles.comment_details}>
           <span
-            className={`${styles.vote_count} ${
-              voteCount >= 3
-                ? styles.positive
-                : voteCount < 3 && voteCount !== 0
-                ? styles.negative
-                : null
-            }`}>
-            {voteCount}
+            className={styles.delete_comment}
+            onClick={() => {
+              setTaskId(task.id)
+              setCommentsArray(task.comments)
+              setCommentObj(comment)
+              // console.log(task.comments)
+              // console.log('CT', comment)
+              handleDeleteComment
+            }}>
+            <BsTrash />
           </span>
 
-          <span className={styles.vote_btn} onClick={handleDownVote}>
-            <BiDownvote />
+          <UpdateComment comments={task.comments} task={task} content={content} id={id} />
+
+          <span className={styles.comment_name}>
+            <span className={styles.comment_icon}>
+              <RiChatNewLine />
+            </span>
+            {`by ${displayName}`}
+          </span>
+
+          <span className={styles.comment_time}>
+            {`at 
+                  ${createdAt.toDate().toLocaleTimeString()} on 
+                  ${createdAt.toDate().toDateString()}`}
           </span>
         </div>
       </div>
-    </>
+
+      <div className={styles.vote}>
+        <span className={styles.vote_btn} onClick={handleUpVote}>
+          <BiUpvote />
+        </span>
+
+        <span
+          className={`${styles.vote_count} ${
+            voteCount >= 3
+              ? styles.positive
+              : voteCount < 3 && voteCount !== 0
+              ? styles.negative
+              : null
+          }`}>
+          {voteCount}
+        </span>
+
+        <span className={styles.vote_btn} onClick={handleDownVote}>
+          <BiDownvote />
+        </span>
+      </div>
+    </div>
   )
 }
 
@@ -160,10 +137,3 @@ Comment.propTypes = {
   // key: PropTypes.string,
   // vote: PropTypes.number,
 }
-
-// onClick={() => {
-//               // console.log(task)
-//               // console.log(task.comments)
-//               // console.log(comment)
-//               // deleteComment(task, task.comments, comment)
-//             }}
