@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { PropTypes } from 'prop-types'
 // import { useFireStore } from '../../hooks/useFireStore'
 
@@ -8,13 +9,15 @@ import { MdTimer } from 'react-icons/md'
 
 // STYLES
 import styles from './Admin.module.scss'
-import { GoCommentDiscussion } from 'react-icons/go'
 import { RiChatOffLine } from 'react-icons/ri'
-import AdminComments from './AdminComments'
 import AddComment from './AdminAddCommments'
+import AdminTaskComments from './AdminTaskComments'
+// import AdminComments from './AdminComments'
+// import { GoCommentDiscussion } from 'react-icons/go'
 
 const AllTaskLists = ({ tasks }) => {
-  // console.log('tasks:', tasks)
+  const [toggleComments, setToggleComments] = useState(true)
+
   return (
     <ul className={styles.task_list}>
       {tasks.map((task) => (
@@ -57,24 +60,29 @@ const AllTaskLists = ({ tasks }) => {
                       </span>
                     </div>
                   ) : (
-                    <div className={styles.comment_toggle__btn}>
-                      <span>Toggle Comments</span>
-                      <span className={styles.toggle_btn}>
-                        <GoCommentDiscussion />
-                      </span>
-                    </div>
+                    <AdminTaskComments comments={task.comments} task={task} />
+
+                    // <div
+                    //   className={styles.comment_toggle__btn}
+                    //   onClick={() => setToggleComments((prevState) => !prevState)}>
+                    //   <span>Toggle Comments</span>
+                    //   <span className={styles.toggle_btn}>
+                    //     <GoCommentDiscussion />
+                    //   </span>
+                    // </div>
                   )}
 
-                  {task.comments.map((comment) => (
-                    <AdminComments
-                      key={comment.id}
-                      content={comment.content}
-                      displayName={comment.displayName}
-                      createdAt={comment.createdAt}
-                      id={comment.id}
-                      comment={comment}
-                    />
-                  ))}
+                  {/* {toggleComments &&
+                    task.comments.map((comment) => (
+                      <AdminComments
+                        key={comment.id}
+                        content={comment.content}
+                        displayName={comment.displayName}
+                        createdAt={comment.createdAt}
+                        id={comment.id}
+                        comment={comment}
+                      />
+                    ))} */}
                 </div>
               )}
             </>
