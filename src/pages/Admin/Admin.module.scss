@@ -385,3 +385,27 @@ $deadline: #ff4658;
     }
   }
 }
+
+// MEDIA QUERY FOR 420px SCREENS AND SMALLER
+@media only screen and (max-width: 420px) {
+  .adminboard {
+    .updateComment {
+
+      textarea {
+        max-width: 13.5rem;
+      }
+    }
+  }
+}
+
+// MEDIA QUERY FOR 370px SCREENS AND SMALLER
+@media only screen and (max-width: 370px) {
+  .adminboard {
+    .updateComment {
+
+      textarea {
+        max-width: 12.5rem;
+      }
+    }
+  }
+}

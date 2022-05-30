@@ -168,7 +168,7 @@ const TaskLists = ({ tasks }) => {
                 </div>
               </div>
 
-              <AddComment taskId={task.id} taskComments={task.comments} />
+              {task.comments && <AddComment taskId={task.id} taskComments={task.comments} />}
             </div>
 
             <TaskComments comments={task.comments} task={task} />
