@@ -73,7 +73,7 @@ $deadline: #ff4658;
   background: $base-bg;
   min-height: 100vh;
   width: 100%;
-  padding-block: 5%;
+  padding-block: 5rem;
   padding-inline: 2%;
 
   .dashboard {
@@ -105,7 +105,7 @@ $deadline: #ff4658;
             box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
               rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
             background: $white-smoke;
-            border-radius: 10px;
+            border-radius: 20px;
             margin-block-end: 10%;
             padding-inline: 2rem;
             padding-block: 2rem 1rem;
@@ -237,7 +237,7 @@ $deadline: #ff4658;
                   width: 100%;
                   max-width: 500px;
                   background: $white;
-                  margin-block: 0.5rem;
+                  margin-block: 1rem;
                   border-radius: 10px;
                   display: flex;
                   flex-direction: column;
@@ -246,7 +246,7 @@ $deadline: #ff4658;
                     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
                   textarea {
-                    min-height: 7rem;
+                    min-height: 5rem;
                     border: none;
                     border-radius: 10px 10px 0 0;
                     padding: 0.7rem;

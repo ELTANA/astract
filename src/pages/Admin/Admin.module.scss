@@ -74,7 +74,7 @@ $deadline: #ff4658;
   min-height: 100vh;
   background: $base-bg;
   color: $base-bg-alt;
-  padding-top: 10%;
+  padding-block: 5rem;
 
   .adminboard {
     width: 100%;
@@ -138,12 +138,10 @@ $deadline: #ff4658;
         }
 
         .add_comment {
-          margin-inline: auto;
           width: 100%;
           max-width: 400px;
           background: $white;
           margin-block: 2rem;
-          margin-block-end: 2.5rem;
           border-radius: 10px;
           display: flex;
           flex-direction: column;
@@ -152,7 +150,7 @@ $deadline: #ff4658;
             rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
           textarea {
-            min-height: 7rem;
+            min-height: 5rem;
             border: none;
             border-radius: 10px 10px 0 0;
             padding: 0.7rem;
