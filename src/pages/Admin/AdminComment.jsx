@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { astractFirestore } from '../../firebase/config'
+
+// ANIMATE ON SCROLL
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 // COMPONENETS
 import { RiChatNewLine } from 'react-icons/ri'
@@ -12,7 +16,13 @@ import AdminUpdateComment from './AdminUpdateComment'
 import styles from './Admin.module.scss'
 
 const AdminComment = ({ task, comment, content, displayName, createdAt, id }) => {
-  const [updatedComment, setUpdatedComment] = useState(null)
+  // ANIMATE ON SCROLL
+  useEffect(() => {
+    AOS.init()
+    AOS.refresh()
+  }, [])
+
+  // const [updatedComment, setUpdatedComment] = useState(null)
   const [commentsArray, setCommentsArray] = useState(null)
   const [commentObj, setCommentObj] = useState(null)
   const [taskId, setTaskId] = useState(null)
@@ -33,23 +43,23 @@ const AdminComment = ({ task, comment, content, displayName, createdAt, id }) =>
   }
 
   const handleDeleteComment = () => {
-    const deleteComment = async () => {
-      const res = await astractFirestore
-        .collection('Tasks')
-        .doc(taskId)
-        .update({
-          comments: commentsArray.arrayRemove(commentObj.value)
-        })
-    }
-    deleteComment()
+    // const deleteComment = async () => {
+    //   const res = await astractFirestore
+    //     .collection('Tasks')
+    //     .doc(taskId)
+    //     .update({
+    //       comments: commentsArray.arrayRemove(commentObj.value)
+    //     })
+    // }
+    // deleteComment()
   }
 
   return (
     <>
-      <div className={styles.comment}>
+      <div className={styles.comment} data-aos='fade-up'>
         <div className={styles.comment_container}>
           <div className={styles.comment_content}>
-            <p>
+            <p data-aos='fade-up'>
               <span>“</span>
               {content}
               <span>”</span>
@@ -64,20 +74,28 @@ const AdminComment = ({ task, comment, content, displayName, createdAt, id }) =>
                 setCommentsArray(task.comments)
                 setCommentObj(comment)
                 handleDeleteComment
-              }}>
+              }}
+              data-aos='fade-up'>
               <BsTrash />
             </span>
 
-            <AdminUpdateComment comments={task.comments} task={task} content={content} id={id} />
+            <AdminUpdateComment
+              data-aos='fade-up'
+              data-aos-delay='100'
+              comments={task.comments}
+              task={task}
+              content={content}
+              id={id}
+            />
 
-            <span className={styles.comment_name}>
+            <span className={styles.comment_name} data-aos='fade-up' data-aos-delay='200'>
               <span className={styles.comment_icon}>
                 <RiChatNewLine />
               </span>
               {`by ${displayName}`}
             </span>
 
-            <span className={styles.comment_time}>
+            <span className={styles.comment_time} data-aos='fade-up' data-aos-delay='300'>
               {`at 
                   ${createdAt.toDate().toLocaleTimeString()} on 
                   ${createdAt.toDate().toDateString()}`}

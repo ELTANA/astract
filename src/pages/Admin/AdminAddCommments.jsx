@@ -1,5 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+
+// ANIMATE ON SCROLL
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 // HOOKS
 import { timeStamp } from '../../firebase/config'
@@ -11,6 +15,12 @@ import { useFireStore } from '../../hooks/useFireStore'
 import styles from './Admin.module.scss'
 
 const AddComment = ({ taskId, taskComments }) => {
+  // ANIMATE ON SCROLL
+  useEffect(() => {
+    AOS.init()
+    AOS.refresh()
+  }, [])
+
   const { user } = useAuthContext()
   const { addComment, response } = useFireStore('Tasks')
   const [newComment, setNewComment] = useState('')
@@ -39,7 +49,11 @@ const AddComment = ({ taskId, taskComments }) => {
   }
 
   return (
-    <form className={styles.add_comment} onSubmit={handleAddComment}>
+    <form
+      className={styles.add_comment}
+      onSubmit={handleAddComment}
+      data-aos='fade-up'
+      data-aos-delay='400'>
       <textarea
         placeholder='Enter New Comment'
         onChange={(e) => setNewComment(e.target.value)}

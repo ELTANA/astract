@@ -37,11 +37,12 @@ $deadline: #ff4658;
 
 @keyframes slide_up {
   0% {
-    transform: translateY(100%);
+    transform: translateY(0);
     opacity: 0;
   }
 
   50% {
+    transform: translateY(-100%);
     opacity: 0.5;
   }
 
@@ -51,13 +52,20 @@ $deadline: #ff4658;
   }
 }
 
-@keyframes slide_right {
+@keyframes slide_down {
   0% {
-    transform: translateX(100%);
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateY(100%);
+    opacity: 0.5;
   }
 
   100% {
-    transform: translateX(0);
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -80,8 +88,9 @@ $deadline: #ff4658;
         list-style: none;
         background: $white-smoke;
         color: $base-bg-alt;
+        border-radius: 1.5rem;
         padding: 5%;
-        margin-block: 1rem;
+        margin-block-end: 5rem;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
         .task_title {
@@ -167,6 +176,7 @@ $deadline: #ff4658;
             padding-block: 0.5rem;
             border-radius: 0 0 10px 10px;
             font-size: 0.8rem;
+            transition: all 500ms ease-in;
 
             &:hover {
               background: $violet-alt;
@@ -182,9 +192,10 @@ $deadline: #ff4658;
           flex-direction: column;
           gap: 1rem;
           overflow: hidden;
-          transition: all 1s ease-in;
+          transition: all 500ms ease-in;
 
           .comment {
+            user-select: none;
             width: inherit;
             background: white;
             color: $base-bg-alt;
@@ -207,22 +218,29 @@ $deadline: #ff4658;
               justify-content: center;
               gap: 0.5rem;
               overflow: hidden;
-              transition: all 500ms ease-in !important;
+              transition: all 500ms ease-in;
 
               .vote_count {
                 user-select: none;
                 font-size: 1.3rem;
                 font-weight: 600;
                 color: $base-bg-alt;
-                animation: slide_up 500ms linear 100ms forwards;
+                animation: pulse 500ms linear 100ms forwards;
+                transition: all 500ms ease-in;
 
                 &.positive {
                   color: $green-dark;
+                  animation: pulse 500ms linear 100ms forwards;
+                  transition: all 500ms ease-in;
                 }
 
                 &.negative {
                   color: $mild-red;
+                  animation: slide_down 500ms linear 100ms forwards;
+                  transition: all 500ms ease-in;
                 }
+
+
               }
 
               .vote_btn {
@@ -254,6 +272,7 @@ $deadline: #ff4658;
               padding-block-start: 1rem;
               padding-block-end: 1.5rem;
               padding-inline: 1rem;
+              transition: all 500ms ease-in;
 
               .comment_content {
                 user-select: none;
@@ -449,6 +468,19 @@ $deadline: #ff4658;
             }
           }
         }
+      }
+    }
+  }
+}
+
+// MEDIA QUERY FOR 768px SCREENS AND SMALLER
+@media only screen and (max-width: 768px) {
+  .adminboard {
+    .task {
+      margin-block-end: 3rem !important;
+
+      .task_comments {
+        margin-block-start: 0 !important;
       }
     }
   }

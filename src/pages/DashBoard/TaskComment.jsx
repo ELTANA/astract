@@ -1,5 +1,9 @@
+import { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useFireStore } from '../../hooks/useFireStore'
+
+// ANIMATE ON SCROLL
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 // COMPONENTS
 import Comment from './Comment'
@@ -11,12 +15,20 @@ import styles from './DashBoard.module.scss'
 import { useState } from 'react'
 
 const TaskComments = ({ task, comments }) => {
+  // ANIMATE ON SCROLL
+  useEffect(() => {
+    AOS.init()
+    AOS.refresh()
+  }, [])
+
   const [toggleComments, setToggleComments] = useState(true)
 
   return (
     <>
       {!comments ? (
-        <span>Deprecated Task</span>
+        <span data-aos='fade-up' data-aos-delay='500'>
+          Deprecated Task
+        </span>
       ) : (
         <div className={styles.task_comments}>
           {comments.length < 1 ? (
@@ -42,6 +54,7 @@ const TaskComments = ({ task, comments }) => {
               {toggleComments &&
                 comments.map((comment) => (
                   <Comment
+                    data-aos='fade-up'
                     key={comment.id}
                     content={comment.content}
                     displayName={comment.displayName}

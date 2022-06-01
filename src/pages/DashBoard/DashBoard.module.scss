@@ -19,7 +19,9 @@ $violet: #6c63ff;
 $violet-alt: #544bff;
 $mild-violet: #8882ff;
 $gray: #d4d4d4;
-// $gray: #909090;
+$creator: #00c800;
+$category: #746dff;
+$deadline: #ff4658;
 
 @keyframes pulse {
 
@@ -35,11 +37,12 @@ $gray: #d4d4d4;
 
 @keyframes slide_up {
   0% {
-    transform: translateY(100%);
+    transform: translateY(0);
     opacity: 0;
   }
 
   50% {
+    transform: translateY(-100%);
     opacity: 0.5;
   }
 
@@ -49,13 +52,20 @@ $gray: #d4d4d4;
   }
 }
 
-@keyframes slide_right {
+@keyframes slide_down {
   0% {
-    transform: translateX(100%);
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateY(100%);
+    opacity: 0.5;
   }
 
   100% {
-    transform: translateX(0);
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -106,53 +116,46 @@ $gray: #d4d4d4;
             .task_details {
               width: 100%;
               display: flex;
-              align-items: center;
-              justify-content: space-between;
+              flex-direction: column;
+              // align-items: center;
+              justify-content: center;
               padding-block-end: 1rem;
               border-block-end: 1px solid $gray;
 
-              .name_div {
-                user-select: none;
+              .details {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+                padding-block-end: 0.5rem;
 
-                .name {
-                  user-select: none;
-                  font-size: 1.5rem;
-                  margin-block-end: 0.5rem;
+                .creator,
+                .category,
+                .deadline {
+                  color: $white;
+                  font-size: 0.8rem;
+                  padding-inline: 1rem;
+                  padding-block: 0.3rem;
+                  border-radius: 0.8rem;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 0.5rem;
+                }
+
+                .creator {
+                  background: $creator;
+
                 }
 
                 .category {
-                  user-select: none;
-                  background: $violet;
-                  color: $white-smoke;
-                  font-size: 0.7rem;
-                  padding-block: 0.3rem;
-                  padding-inline: 1rem;
-                  border-radius: 20px;
+                  background: $category;
+                }
+
+                .deadline {
+                  background: $deadline;
                 }
               }
-
-              .deadline {
-                user-select: none;
-                color: $mild-red;
-                text-align: end;
-                font-weight: 500;
-
-                p {
-                  user-select: none;
-                  margin-block-end: 0.5rem;
-                }
-
-                span {
-                  user-select: none;
-                  background: $mild-red;
-                  color: $white-smoke;
-                  padding-block: 0.3rem;
-                  padding-inline: 1rem;
-                  border-radius: 20px;
-                  font-size: 0.7rem;
-                }
-              }
-
             }
 
             .interactive_div {
@@ -306,7 +309,7 @@ $gray: #d4d4d4;
                     align-items: center;
                     justify-content: center;
                     gap: 0.5rem;
-                    // overflow: hidden;
+                    overflow: hidden;
                     transition: all 500ms ease-in;
 
                     .vote_count {
@@ -314,14 +317,19 @@ $gray: #d4d4d4;
                       font-size: 1.3rem;
                       font-weight: 600;
                       color: $base-bg-alt;
-                      animation: slide_up 500ms linear 100ms forwards;
+                      animation: pulse 500ms linear 100ms forwards;
+                      transition: all 500ms ease-in;
 
                       &.positive {
                         color: $green-dark;
+                        animation: pulse 500ms linear 100ms forwards;
+                        transition: all 500ms ease-in;
                       }
 
                       &.negative {
                         color: $mild-red;
+                        animation: slide_down 500ms linear 100ms forwards;
+                        transition: all 500ms ease-in;
                       }
                     }
 

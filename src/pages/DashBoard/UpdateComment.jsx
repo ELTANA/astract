@@ -1,5 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+
+// ANIMATE ON SCROLL
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 // COMPONENTS
 import { FaRegEdit } from 'react-icons/fa'
@@ -11,6 +15,12 @@ import styles from './DashBoard.module.scss'
 import { astractFirestore } from '../../firebase/config'
 
 const UpdateComment = ({ comments, task, content, id }) => {
+  // ANIMATE ON SCROLL
+  useEffect(() => {
+    AOS.init()
+    AOS.refresh()
+  }, [])
+
   const [commentsId, setCommentsId] = useState('')
   const [updateDiv, setUpdateDiv] = useState(false)
   const [updateInput, setUpdateInput] = useState(false)
@@ -42,6 +52,8 @@ const UpdateComment = ({ comments, task, content, id }) => {
   return (
     <>
       <span
+        data-aos='fade-up'
+        data-aos-delay='300'
         className={styles.edit_comment}
         onClick={() => {
           setUpdateDiv((prevState) => !prevState)
@@ -56,6 +68,7 @@ const UpdateComment = ({ comments, task, content, id }) => {
       {updateDiv && (
         <label className={styles.updateComment}>
           <textarea
+            data-aos='fade-up'
             name='updateComment'
             cols='30'
             rows='1'
@@ -64,12 +77,16 @@ const UpdateComment = ({ comments, task, content, id }) => {
             value={updateInput}
             required></textarea>
           <MdCheck
+            data-aos='fade-up'
+            data-aos-delay='100'
             className={styles.update_btn_edit}
             onClick={() => {
               handleUpdateComment
             }}
           />
           <VscClose
+            data-aos='fade-up'
+            data-aos-delay='200'
             className={styles.update_btn_close}
             onClick={() => {
               setUpdateDiv(false)

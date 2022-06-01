@@ -1,4 +1,9 @@
+import { useEffect } from 'react'
 import { PropTypes } from 'prop-types'
+
+// ANIMATE ON SCROLL
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 // COMPONENTS
 import { FiFolderPlus } from 'react-icons/fi'
@@ -12,28 +17,36 @@ import AddComment from './AdminAddCommments'
 import AdminTaskComments from './AdminTaskComments'
 
 const AllTaskLists = ({ tasks }) => {
+  // ANIMATE ON SCROLL
+  useEffect(() => {
+    AOS.init()
+    AOS.refresh()
+  }, [])
+
   return (
-    <ul className={styles.task_list}>
+    <ul className={styles.task_list} data-aos='fade-up'>
       {tasks.map((task) => (
         <li key={task.id} className={styles.task}>
-          <h2 className={styles.task_title}> {task.taskName}</h2>
+          <h2 className={styles.task_title} data-aos='fade-up'>
+            {task.taskName}
+          </h2>
 
           <div className={styles.task_details}>
             <div className={styles.details}>
               {task.displayName && (
-                <div className={styles.creator}>
+                <div className={styles.creator} data-aos='fade-up' data-aos-delay='100'>
                   <FiFolderPlus />
                   <span> {task.displayName}</span>
                 </div>
               )}
 
-              <div className={styles.category}>
+              <div className={styles.category} data-aos='fade-up' data-aos-delay='200'>
                 <BiCategory />
                 <span>{task.taskCategory}</span>
               </div>
 
               {task.taskDeadline && (
-                <div className={styles.deadline}>
+                <div className={styles.deadline} data-aos='fade-up' data-aos-delay='300'>
                   <MdTimer />
                   <span>{task.taskDeadline}</span>
                 </div>
@@ -43,7 +56,9 @@ const AllTaskLists = ({ tasks }) => {
             <>
               {task.comments && <AddComment taskId={task.id} taskComments={task.comments} />}
               {!task.comments ? (
-                <span>Deprecated Task</span>
+                <span data-aos='fade-up' data-aos-delay='500'>
+                  Deprecated Task
+                </span>
               ) : (
                 <div className={styles.task_comments}>
                   {task.comments.length < 1 ? (
@@ -54,7 +69,12 @@ const AllTaskLists = ({ tasks }) => {
                       </span>
                     </div>
                   ) : (
-                    <AdminTaskComments comments={task.comments} task={task} />
+                    <AdminTaskComments
+                      data-aos='fade-up'
+                      data-aos-delay='500'
+                      comments={task.comments}
+                      task={task}
+                    />
                   )}
                 </div>
               )}

@@ -19,24 +19,28 @@ const AdminUpdateComment = ({ comments, task, content, id }) => {
   }
 
   const handleUpdateComment = () => {
-    const update = async () => {
-      const res = await astractFirestore
-        .collection('Tasks')
-        .doc(commentsId)
-        .update({
-          comments: {
-            content: updateInput
-          }
-        })
-      setUpdateDiv(false)
-      setUpdateInput('')
-    }
-    return update()
+    setUpdateDiv(false)
+    setUpdateInput('')
+    // const update = async () => {
+    //   console.log(task.id)
+    //   const res = await astractFirestore
+    //     .collection('Tasks')
+    //     .doc(task.id)
+    //     .update({ comments: [...comments, { content: updateInput }] })
+    // }
+    // update()
+    // if (update) {
+    // setUpdateDiv(false)
+    // setUpdateInput('')
+    // console.log('edited')
+    // }
   }
 
   return (
     <>
       <span
+        data-aos='fade-up'
+        data-aos-delay='100'
         className={styles.edit_comment}
         onClick={() => {
           setUpdateDiv((prevState) => !prevState)
@@ -46,8 +50,9 @@ const AdminUpdateComment = ({ comments, task, content, id }) => {
         <FaRegEdit />
       </span>
       {updateDiv && (
-        <label className={styles.updateComment}>
+        <label className={styles.updateComment} data-aos='fade-up'>
           <textarea
+            data-aos='fade-up'
             name='updateComment'
             cols='30'
             rows='1'
@@ -55,18 +60,22 @@ const AdminUpdateComment = ({ comments, task, content, id }) => {
             onChange={onUpdateInputChange}
             value={updateInput}
             required></textarea>
+
           <MdCheck
             className={styles.update_btn_edit}
-            onClick={() => {
-              handleUpdateComment
-            }}
+            onClick={handleUpdateComment}
+            data-aos='fade-up'
+            data-aos-delay='100'
           />
+
           <VscClose
             className={styles.update_btn_close}
             onClick={() => {
               setUpdateDiv(false)
               setUpdateInput('')
             }}
+            data-aos='fade-up'
+            data-aos-delay='200'
           />
         </label>
       )}

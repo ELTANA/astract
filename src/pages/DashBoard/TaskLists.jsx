@@ -1,18 +1,32 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { PropTypes } from 'prop-types'
 import { useFireStore } from '../../hooks/useFireStore'
 import { astractFirestore } from '../../firebase/config'
+
+// ANIMATE ON SCROLL
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 // COMPONENTS
 import AddComment from './AddComment'
 import TaskComments from './TaskComment'
 import { Modal } from 'react-bootstrap'
+import { FiFolderPlus } from 'react-icons/fi'
+import { BiCategory } from 'react-icons/bi'
+import { MdTimer } from 'react-icons/md'
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
 
 // STYLES
 import styles from './DashBoard.module.scss'
 
 const TaskLists = ({ tasks }) => {
+  // ANIMATE ON SCROLL
+  useEffect(() => {
+    AOS.init()
+    AOS.refresh()
+  }, [])
+
+  // DELETE TASK
   const { deleteTaskDoc } = useFireStore('Tasks')
 
   //  UPDATE TASK MODAL
@@ -67,20 +81,30 @@ const TaskLists = ({ tasks }) => {
     <ul>
       {tasks.map((task) => (
         // console.log('Tasks:', task)
-        <li key={task.id} className={styles.task}>
+        <li key={task.id} className={styles.task} data-aos='fade-up'>
           <div className={styles.task_details}>
-            <div className={styles.name_div}>
-              <h2 className={styles.name}> {task.taskName}</h2>
+            <h2 className={styles.name} data-aos='fade-up'>
+              {task.taskName}
+            </h2>
 
-              <span className={styles.category}>{task.taskCategory}</span>
+            <div className={styles.details}>
+              <span className={styles.creator} data-aos='fade-up' data-aos-delay='100'>
+                <FiFolderPlus />
+                {task.displayName}
+              </span>
+
+              <span className={styles.category} data-aos='fade-up' data-aos-delay='200'>
+                <BiCategory />
+                {task.taskCategory}
+              </span>
+
+              {task.taskDeadline && (
+                <div className={styles.deadline} data-aos='fade-up' data-aos-delay='300'>
+                  <MdTimer />
+                  <span>{task.taskDeadline}</span>
+                </div>
+              )}
             </div>
-
-            {task.taskDeadline && (
-              <div className={styles.deadline}>
-                <p>Deadline</p>
-                <span>{task.taskDeadline}</span>
-              </div>
-            )}
 
             <Modal show={show} onHide={handleClose} className={styles.update_modal}>
               <Modal.Header closeButton></Modal.Header>
@@ -138,9 +162,10 @@ const TaskLists = ({ tasks }) => {
           </div>
 
           <div className={styles.interactive_div}>
-            <div className={styles.interactive}>
+            <div className={styles.interactive} data-aos='fade-up' data-aos-delay='400'>
               <div className={styles.action_btns_wrapper}>
                 <div
+                  data-aos='fade-up'
                   className={styles.action_btns_edit}
                   onClick={(e) => {
                     setShow(true)
@@ -156,6 +181,8 @@ const TaskLists = ({ tasks }) => {
                 </div>
 
                 <div
+                  data-aos='fade-up'
+                  data-aos-delay='100'
                   className={styles.action_btns_delete}
                   onClick={() => {
                     deleteTaskDoc(task.id)
@@ -171,7 +198,12 @@ const TaskLists = ({ tasks }) => {
               {task.comments && <AddComment taskId={task.id} taskComments={task.comments} />}
             </div>
 
-            <TaskComments comments={task.comments} task={task} />
+            <TaskComments
+              data-aos='fade-up'
+              data-aos-delay='500'
+              comments={task.comments}
+              task={task}
+            />
           </div>
         </li>
       ))}
