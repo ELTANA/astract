@@ -2,26 +2,23 @@
 
 $font-family: 'Macondo', cursive;
 $base-bg: #faebd7;
-$base-bg-alt: #191d25;
-$base-font: #222;
-$green: #008000;
-$green-alt: #008000cc;
-$green-dark: #00c800;
-$green-light: #c6f7c6;
-$green-light-alt: #f0fff0;
+$base-font: #191d25;
 $white: #fff;
 $white-smoke: #f5f5f5;
-$mild-red: #dc3545;
-$dark-red: #ff0019;
-$mild-blue-alt: #0d6efd;
+$gray: #d4d4d4;
 $mild-blue: #0066ff;
+$mild-blue-alt: #0d6efd;
 $violet: #6c63ff;
 $violet-alt: #544bff;
-$mild-violet: #8882ff;
-$gray: #d4d4d4;
 $creator: #00c800;
-$category: #746dff;
+$creator-hover: #008000cc;
+$creator-light: #f0fff0;
+$category: #ff7f50;
 $deadline: #ff4658;
+$mild-red: #dc3545;
+$delete: #ff0019;
+$comment: #746dff;
+$edit: #3988ff;
 
 @keyframes pulse {
 
@@ -114,6 +111,7 @@ $deadline: #ff4658;
             align-items: center;
 
             .task_details {
+              user-select: none;
               width: 100%;
               display: flex;
               flex-direction: column;
@@ -131,11 +129,14 @@ $deadline: #ff4658;
 
                 .creator,
                 .category,
-                .deadline {
+                .deadline,
+                .add_comment_toggle,
+                .edit,
+                .delete {
                   color: $white;
-                  font-size: 0.8rem;
+                  font-size: 0.85rem;
                   padding-inline: 1rem;
-                  padding-block: 0.3rem;
+                  padding-block: 0.4rem;
                   border-radius: 0.8rem;
                   display: flex;
                   align-items: center;
@@ -145,7 +146,6 @@ $deadline: #ff4658;
 
                 .creator {
                   background: $creator;
-
                 }
 
                 .category {
@@ -155,97 +155,63 @@ $deadline: #ff4658;
                 .deadline {
                   background: $deadline;
                 }
-              }
-            }
 
-            .interactive_div {
-              width: 100%;
-              display: flex;
-              flex-direction: column;
+                .edit,
+                .delete,
+                .add_comment_toggle {
+                  cursor: pointer;
+                  padding-block: 0.45rem;
+                  font-weight: 500;
+                  background: $white;
+                  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
+                    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                  transition: all 500ms ease-in;
 
-              .interactive {
-                width: 100%;
-                margin-block: 1.5rem;
-                color: $base-font;
-                display: flex;
-                gap: 2rem;
-
-                .action_btns_wrapper {
-                  user-select: none;
-                  width: 100%;
-                  display: flex;
-                  align-items: center;
-                  justify-content: flex-start;
-                  gap: 1rem;
-
-
-                  .action_btns_edit {
-                    color: $violet;
-                    transition: all 300ms ease-in;
-
-                    &:hover {
-                      background: $violet;
-                      color: $base-bg;
-                      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
-                        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-                    }
+                  &:hover {
+                    color: $white;
+                    font-weight: 500;
                   }
+                }
 
-                  .action_btns_delete {
-                    color: $mild-red;
-                    transition: all 700ms ease-in;
+                .edit {
+                  color: $edit;
 
-                    &:hover {
-                      background: $mild-red;
-                      color: $base-bg;
-                      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
-                        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-                    }
+                  &:hover {
+                    background: $edit;
                   }
+                }
 
-                  .action_btns_edit,
-                  .action_btns_delete {
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    gap: 0.3rem;
-                    font-size: 1rem;
-                    padding-block: 0.3rem;
-                    padding-inline: 0.5rem;
-                    border-radius: 1rem;
+                .delete {
+                  color: $delete;
 
-                    .title {
-                      font-size: 0.7rem;
-                    }
+                  &:hover {
+                    background: $delete;
+                  }
+                }
 
-                    .action_btn {
-                      border-radius: 50%;
-                      width: 2rem;
-                      height: 2rem;
-                      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
-                        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 1rem;
-                    }
+                .add_comment_toggle {
+                  width: max-content;
+                  color: $comment;
 
+                  &:hover {
+                    background: $comment;
                   }
                 }
 
                 .add_comment {
-                  width: 100%;
-                  max-width: 500px;
-                  background: $white;
-                  margin-block: 1rem;
-                  border-radius: 10px;
                   display: flex;
                   flex-direction: column;
-                  justify-content: space-between;
+                  align-items: center;
+                  width: 100%;
+                  max-width: 500px;
+                  margin-block: 1rem;
+                  background: $white;
+                  border-radius: 10px;
                   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px,
                     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
                   textarea {
+                    width: 100%;
                     min-height: 5rem;
                     border: none;
                     border-radius: 10px 10px 0 0;
@@ -258,11 +224,12 @@ $deadline: #ff4658;
                     }
 
                     &:focus:valid {
-                      outline: 1px solid $green;
+                      outline: 1px solid $creator;
                     }
                   }
 
                   .comments_btn {
+                    width: 100%;
                     border: none;
                     outline: none;
                     background: $violet;
@@ -278,6 +245,17 @@ $deadline: #ff4658;
                   }
                 }
               }
+            }
+
+            .interactive_div {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+
+              .deprecated {
+                margin-block-start: 1rem;
+                margin-block-end: 1.5rem;
+              }
 
               .task_comments {
                 width: 100%;
@@ -290,7 +268,7 @@ $deadline: #ff4658;
                 .comment {
                   width: inherit;
                   background: white;
-                  color: $base-bg-alt;
+                  color: $base-font;
                   border-radius: 10px;
                   margin-block-end: 1rem;
                   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
@@ -298,8 +276,8 @@ $deadline: #ff4658;
 
                   .vote {
                     min-width: 10%;
-                    background: $green-light-alt;
-                    color: $base-bg-alt;
+                    background: $creator-light;
+                    color: $base-font;
                     padding-block: 1rem;
                     padding-inline: 0.5rem;
                     border-radius: 0 10px 10px 0;
@@ -316,12 +294,12 @@ $deadline: #ff4658;
                       user-select: none;
                       font-size: 1.3rem;
                       font-weight: 600;
-                      color: $base-bg-alt;
+                      color: $base-font;
                       animation: pulse 500ms linear 100ms forwards;
                       transition: all 500ms ease-in;
 
                       &.positive {
-                        color: $green-dark;
+                        color: $creator;
                         animation: pulse 500ms linear 100ms forwards;
                         transition: all 500ms ease-in;
                       }
@@ -335,12 +313,12 @@ $deadline: #ff4658;
 
                     .vote_btn {
                       cursor: pointer;
-                      color: $base-bg-alt;
+                      color: $base-font;
                       font-size: 1.3rem;
                       transition: all 500ms ease-in;
 
                       &:hover:first-of-type {
-                        color: $green;
+                        color: $creator;
 
                         &:active {
                           animation: pulse 500ms ease-in;
@@ -364,7 +342,7 @@ $deadline: #ff4658;
 
                     .comment_content {
                       user-select: none;
-                      color: $base-bg-alt;
+                      color: $base-font;
                       font-size: 1rem;
 
                       p {
@@ -426,7 +404,7 @@ $deadline: #ff4658;
 
                       .updateComment {
                         background-color: $white;
-                        color: $base-bg-alt;
+                        color: $base-font;
                         display: flex;
                         flex-wrap: wrap;
                         row-gap: 0.5rem;
@@ -449,7 +427,7 @@ $deadline: #ff4658;
                             }
 
                             &:valid {
-                              outline: 2px solid $green;
+                              outline: 2px solid $creator;
                             }
                           }
                         }
@@ -483,10 +461,10 @@ $deadline: #ff4658;
 
                         .update_btn_edit {
                           margin-inline: 0.8rem;
-                          color: $green-alt;
+                          color: $creator-hover;
 
                           &:hover {
-                            background: $green-alt;
+                            background: $creator-hover;
                             color: $white-smoke;
                           }
                         }
@@ -513,13 +491,14 @@ $deadline: #ff4658;
                       .comment_time {
                         margin-block-end: 1rem;
                         font-size: 0.7rem;
-                        color: rgba($color: $base-bg-alt, $alpha: 0.5);
+                        color: rgba($color: $base-font, $alpha: 0.5);
                       }
                     }
                   }
                 }
 
                 .comment_toggle__btn {
+                  user-select: none;
                   cursor: pointer;
                   display: flex;
                   align-items: center;
@@ -568,7 +547,7 @@ $deadline: #ff4658;
       width: 40%;
 
       .aside_card {
-        background-color: $base-bg-alt;
+        background-color: $base-font;
         color: $white-smoke;
         padding-block: 5%;
         border-radius: 10px;

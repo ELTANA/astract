@@ -26,6 +26,12 @@ const TaskLists = ({ tasks }) => {
     AOS.refresh()
   }, [])
 
+  // TOGGLE ADD COMMENT TEXTAREA FIELD
+  const [toggleTextArea, setToggleTextArea] = useState(true)
+  const toggleAddComment = () => {
+    setToggleTextArea((prevState) => !prevState)
+  }
+
   // DELETE TASK
   const { deleteTaskDoc } = useFireStore('Tasks')
 
@@ -63,13 +69,13 @@ const TaskLists = ({ tasks }) => {
           taskDeadline
         })
 
-        // if (res) {
-        setShow(false)
-        setTaskId('')
-        setTaskName('')
-        setTaskCategory('')
-        setTaskDeadline('')
-        // }
+        if (res) {
+          setShow(false)
+          setTaskId('')
+          setTaskName('')
+          setTaskCategory('')
+          setTaskDeadline('')
+        }
       } catch (err) {
         alert(err.message)
       }
@@ -103,6 +109,40 @@ const TaskLists = ({ tasks }) => {
                   <MdTimer />
                   <span>{task.taskDeadline}</span>
                 </div>
+              )}
+
+              <div
+                className={styles.edit}
+                data-aos='fade-up'
+                data-aos-delay='400'
+                onClick={(e) => {
+                  setShow(true)
+                  setTaskId(task.id)
+                  setTaskName(task.taskName)
+                  setTaskCategory(task.taskCategory)
+                  setTaskDeadline(task.taskDeadline)
+                }}>
+                <BsPencilSquare />
+                <span>Edit Task</span>
+              </div>
+
+              <div
+                data-aos='fade-up'
+                data-aos-delay='500'
+                className={styles.delete}
+                onClick={() => {
+                  deleteTaskDoc(task.id)
+                }}>
+                <BsTrash />
+                <span>Delete Task</span>
+              </div>
+
+              {task.comments && (
+                <AddComment
+                  toggleTextArea={toggleTextArea}
+                  taskId={task.id}
+                  taskComments={task.comments}
+                />
               )}
             </div>
 
@@ -162,42 +202,6 @@ const TaskLists = ({ tasks }) => {
           </div>
 
           <div className={styles.interactive_div}>
-            <div className={styles.interactive} data-aos='fade-up' data-aos-delay='400'>
-              <div className={styles.action_btns_wrapper}>
-                <div
-                  data-aos='fade-up'
-                  className={styles.action_btns_edit}
-                  onClick={(e) => {
-                    setShow(true)
-                    setTaskId(task.id)
-                    setTaskName(task.taskName)
-                    setTaskCategory(task.taskCategory)
-                    setTaskDeadline(task.taskDeadline)
-                  }}>
-                  <span className={styles.action_btn}>
-                    <BsPencilSquare />
-                  </span>
-                  <div className={styles.title}>Edit Task</div>
-                </div>
-
-                <div
-                  data-aos='fade-up'
-                  data-aos-delay='100'
-                  className={styles.action_btns_delete}
-                  onClick={() => {
-                    deleteTaskDoc(task.id)
-                  }}>
-                  <span className={styles.action_btn}>
-                    <BsTrash task={task} />
-                  </span>
-
-                  <div className={styles.title}>Delete Task</div>
-                </div>
-              </div>
-
-              {task.comments && <AddComment taskId={task.id} taskComments={task.comments} />}
-            </div>
-
             <TaskComments
               data-aos='fade-up'
               data-aos-delay='500'

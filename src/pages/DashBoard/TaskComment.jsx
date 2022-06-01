@@ -21,12 +21,12 @@ const TaskComments = ({ task, comments }) => {
     AOS.refresh()
   }, [])
 
-  const [toggleComments, setToggleComments] = useState(true)
+  const [toggleComments, setToggleComments] = useState(false)
 
   return (
     <>
       {!comments ? (
-        <span data-aos='fade-up' data-aos-delay='500'>
+        <span className={styles.deprecated} data-aos='fade-up' data-aos-delay='500'>
           Deprecated Task
         </span>
       ) : (
@@ -40,13 +40,13 @@ const TaskComments = ({ task, comments }) => {
             </div>
           ) : (
             <>
-              <div
-                className={styles.comment_toggle__btn}
-                onClick={() => {
-                  setToggleComments((prevState) => !prevState)
-                }}>
-                <span>Toggle Comments</span>
-                <span className={styles.toggle_btn}>
+              <div className={styles.comment_toggle__btn}>
+                <span>{toggleComments ? 'Hide Comments' : 'View Comments'}</span>
+                <span
+                  className={styles.toggle_btn}
+                  onClick={() => {
+                    setToggleComments((prevState) => !prevState)
+                  }}>
                   <GoCommentDiscussion />
                 </span>
               </div>
