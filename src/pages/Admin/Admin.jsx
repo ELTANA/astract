@@ -23,13 +23,13 @@ function Admin() {
         linkOneClassName={`nav_link active`}
         linkTwoClassName={`nav_link`}
       />
-      <section className={styles.admin_container}>
+      <main className={styles.admin_container}>
         <Container>
           <h1 className={`text-center ${styles.heading}`}>Admin Dashboard</h1>
 
-          <section className={styles.adminboard}>{tasks && <AllTaskLists tasks={tasks} />}</section>
+          <div className={styles.adminboard}>{tasks && <AllTaskLists tasks={tasks} />}</div>
         </Container>
-      </section>
+      </main>
     </>
   )
 }
