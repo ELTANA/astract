@@ -79,13 +79,11 @@ $deadline: #ff4658;
   .adminboard {
     width: 100%;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
 
 
     .task_list {
-      padding-inline-start: 0;
       padding: 5%;
+      // padding-inline-start: 0;
 
       .task {
         list-style: none;
